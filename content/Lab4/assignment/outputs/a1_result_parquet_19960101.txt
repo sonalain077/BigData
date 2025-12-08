@@ -1,0 +1,6 @@
+Task: A1 - Shipped Items Count
+Date: 1996-01-01
+Format: Parquet
+Duration: 12.52s
+
+ANSWER=266

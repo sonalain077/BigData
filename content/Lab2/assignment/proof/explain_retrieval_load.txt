@@ -1,0 +1,43 @@
+EXPLAIN FORMATTED — Index Load (Section 7, STEP 1)
+================================================================================
+
+Query: spark.read.parquet('/mnt/c/Users/phams/Desktop/E5/BigData/Lab2/assignment/outputs/index_parquet')
+Objective: Read-only scan, no shuffle expected
+
+Physical Plan:
+--------------------------------------------------------------------------------
+== Physical Plan ==
+InMemoryTableScan (1)
+   +- InMemoryRelation (2)
+         +- * ColumnarToRow (4)
+            +- Scan parquet  (3)
+
+
+(1) InMemoryTableScan
+Output [4]: [term#2268, postings#2269, df#2270L, idf#2271]
+Arguments: [term#2268, postings#2269, df#2270L, idf#2271]
+
+(2) InMemoryRelation
+Arguments: [term#2268, postings#2269, df#2270L, idf#2271], StorageLevel(disk, memory, deserialized, 1 replicas)
+
+(3) Scan parquet 
+Output [4]: [term#1947, postings#1948, df#1949L, idf#1950]
+Batched: true
+Location: InMemoryFileIndex [file:/mnt/c/Users/phams/Desktop/E5/BigData/Lab2/assignment/outputs/index_parquet]
+ReadSchema: struct<term:string,postings:array<struct<doc_id:int,tf:bigint>>,df:bigint,idf:double>
+
+(4) ColumnarToRow [codegen id : 1]
+Input [4]: [term#1947, postings#1948, df#1949L, idf#1950]
+
+
+
+================================================================================
+Interpretation:
+--------------------------------------------------------------------------------
+1. FileScan parquet: Reading from Parquet columnar format
+2. Batched: true indicates vectorized (Arrow-optimized) reads
+3. PartitionFilters: None (read all partitions initially)
+4. DataFilters: None (no pre-filter at this stage)
+5. PushedFilters: Will be added when queries filter on 'term'
+6. Shuffle: NONE (input scan only)
+================================================================================

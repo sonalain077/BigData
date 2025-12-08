@@ -1,0 +1,6 @@
+Task: A1 - Shipped Items Count
+Date: 1996-01-01
+Format: TXT
+Duration: 13.07s
+
+ANSWER=266

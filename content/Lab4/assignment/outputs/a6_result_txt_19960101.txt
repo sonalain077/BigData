@@ -1,0 +1,7 @@
+Task: A6 - Pricing Summary Report
+Date: 1996-01-01
+Format: TXT
+Duration: 7.45s
+
+count_order,sum_qty,sum_base_price,sum_disc_price,sum_charge,avg_qty,avg_price,avg_disc
+266,7050.00,9670322.45,9158295.64,9535800.64,26.50,36354.60,0.0527

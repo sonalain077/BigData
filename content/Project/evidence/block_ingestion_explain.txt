@@ -1,0 +1,31 @@
+# Block Ingestion Execution Plan
+# Date: 2025-12-07 17:04:35.882816
+
+== Physical Plan ==
+InMemoryTableScan (1)
+   +- InMemoryRelation (2)
+         +- * Project (5)
+            +- * Project (4)
+               +- * Scan ExistingRDD (3)
+
+
+(1) InMemoryTableScan
+Output [11]: [tx_id#0, block_hash#1, timestamp#2L, n_inputs#3, n_outputs#4, amount_sats#5L, block_size#6, datetime#7, timestamp_hour#8L, date#9, hour#10]
+Arguments: [tx_id#0, block_hash#1, timestamp#2L, n_inputs#3, n_outputs#4, amount_sats#5L, block_size#6, datetime#7, timestamp_hour#8L, date#9, hour#10]
+
+(2) InMemoryRelation
+Arguments: [tx_id#0, block_hash#1, timestamp#2L, n_inputs#3, n_outputs#4, amount_sats#5L, block_size#6, datetime#7, timestamp_hour#8L, date#9, hour#10], StorageLevel(disk, memory, deserialized, 1 replicas)
+
+(3) Scan ExistingRDD [codegen id : 1]
+Output [7]: [tx_id#0, block_hash#1, timestamp#2L, n_inputs#3, n_outputs#4, amount_sats#5L, block_size#6]
+Arguments: [tx_id#0, block_hash#1, timestamp#2L, n_inputs#3, n_outputs#4, amount_sats#5L, block_size#6], MapPartitionsRDD[6] at applySchemaToPythonRDD at NativeMethodAccessorImpl.java:0, ExistingRDD, UnknownPartitioning(0)
+
+(4) Project [codegen id : 1]
+Output [9]: [tx_id#0, block_hash#1, timestamp#2L, n_inputs#3, n_outputs#4, amount_sats#5L, block_size#6, cast(from_unixtime(timestamp#2L, yyyy-MM-dd HH:mm:ss, Some(UTC)) as timestamp) AS datetime#7, (FLOOR((cast(timestamp#2L as double) / 3600.0)) * 3600) AS timestamp_hour#8L]
+Input [7]: [tx_id#0, block_hash#1, timestamp#2L, n_inputs#3, n_outputs#4, amount_sats#5L, block_size#6]
+
+(5) Project [codegen id : 1]
+Output [11]: [tx_id#0, block_hash#1, timestamp#2L, n_inputs#3, n_outputs#4, amount_sats#5L, block_size#6, datetime#7, timestamp_hour#8L, cast(datetime#7 as date) AS date#9, hour(datetime#7, Some(UTC)) AS hour#10]
+Input [9]: [tx_id#0, block_hash#1, timestamp#2L, n_inputs#3, n_outputs#4, amount_sats#5L, block_size#6, datetime#7, timestamp_hour#8L]
+
+

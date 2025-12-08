@@ -1,0 +1,16 @@
+=== A6 Lineitem Parquet Load Plan (1996-01-01) ===
+
+== Physical Plan ==
+* ColumnarToRow (2)
++- Scan parquet  (1)
+
+
+(1) Scan parquet 
+Output [16]: [l_orderkey#126, l_partkey#127, l_suppkey#128, l_linenumber#129, l_quantity#130, l_extendedprice#131, l_discount#132, l_tax#133, l_returnflag#134, l_linestatus#135, l_shipdate#136, l_commitdate#137, l_receiptdate#138, l_shipinstruct#139, l_shipmode#140, l_comment#141]
+Batched: true
+Location: InMemoryFileIndex [file:/mnt/c/Users/phams/Desktop/E5/BigData/Lab4/assignment/data/tpch/TPC-H-0.1-PARQUET/lineitem]
+ReadSchema: struct<l_orderkey:int,l_partkey:int,l_suppkey:int,l_linenumber:int,l_quantity:double,l_extendedprice:double,l_discount:double,l_tax:double,l_returnflag:string,l_linestatus:string,l_shipdate:string,l_commitdate:string,l_receiptdate:string,l_shipinstruct:string,l_shipmode:string,l_comment:string>
+
+(2) ColumnarToRow [codegen id : 1]
+Input [16]: [l_orderkey#126, l_partkey#127, l_suppkey#128, l_linenumber#129, l_quantity#130, l_extendedprice#131, l_discount#132, l_tax#133, l_returnflag#134, l_linestatus#135, l_shipdate#136, l_commitdate#137, l_receiptdate#138, l_shipinstruct#139, l_shipmode#140, l_comment#141]
+

@@ -1,0 +1,21 @@
+================================================================================
+STRIPES APPROACH — EXPLAIN FORMATTED
+================================================================================
+
+Dataset: Shakespeare (122458 lines)
+Method: RDD.flatMap(stripes_extract).reduceByKey(merge_stripes)
+Result: 21611 unique stripes (word1 → context)
+Duration: 82.109s
+
+Physical Plan:
+  Input: Text file (RDD parallelization)
+  Map: Extract stripes (word1 → [(word2, 1), ...])
+  Shuffle: Group by word1 key
+  Reduce: Merge stripe dictionaries (aggregate (word2, count))
+  Output: (word1, [{word2: count, ...}]) tuples
+
+Key Characteristics:
+  - Groups all contexts (word2) for a single word1
+  - Better for statistical analysis (e.g., PMI)
+  - Shuffle key: word1 (fewer keys than Pairs)
+  - Higher memory per partition (full dictionaries)

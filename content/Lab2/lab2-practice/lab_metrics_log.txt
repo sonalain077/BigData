@@ -1,0 +1,5 @@
+run_id,task,note,files_read,input_size_bytes,shuffle_read_bytes,shuffle_write_bytes,timestamp
+r1,Q1_Count,Scan TEXT (Query 5),1,1089.3 KiB,0,0,2025-12-07T04:03:46
+r1,Q1_Count,Scan PARQUET (Query 0),6,25.2 KiB,0,0,2025-12-07T04:03:33
+r1,Q3_Broadcast,Double Broadcast Join (Part+Supp),0,Cached,0,0,2025-12-07T04:03:XX
+r1,B1_Streaming,Q6,3,1140 B,354 B,354 B,2025-12-07T04:03:47

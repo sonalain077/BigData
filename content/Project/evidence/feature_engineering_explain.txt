@@ -1,0 +1,760 @@
+# Feature Engineering Execution Plan
+# Date: 2025-12-07 17:33:29.092682
+
+== Physical Plan ==
+AdaptiveSparkPlan (98)
++- InMemoryTableScan (1) (columnarIn=false, columnarOut=true)
+      +- InMemoryRelation (2)
+            +- AdaptiveSparkPlan (97)
+               +- == Final Plan ==
+                  ResultQueryStage (85)
+                  +- * Project (84)
+                     +- * Filter (83)
+                        +- Window (82)
+                           +- * Project (81)
+                              +- Window (80)
+                                 +- * Project (79)
+                                    +- Window (78)
+                                       +- * Project (77)
+                                          +- Window (76)
+                                             +- * Sort (75)
+                                                +- ShuffleQueryStage (74), Statistics(sizeInBytes=149.7 KiB, rowCount=958)
+                                                   +- Exchange (73)
+                                                      +- TableCacheQueryStage (72), Statistics(sizeInBytes=138.5 KiB, rowCount=958)
+                                                         +- InMemoryTableScan (3) (columnarIn=false, columnarOut=true)
+                                                               +- InMemoryRelation (4)
+                                                                     +- AdaptiveSparkPlan (71)
+                                                      +- == Final Plan ==
+                                                         ResultQueryStage (65)
+                                                         +- * Project (64)
+                                                            +- * BroadcastHashJoin Inner BuildLeft (63)
+                                                               :- BroadcastQueryStage (34), Statistics(sizeInBytes=1056.0 KiB, rowCount=958)
+                                                               :  +- BroadcastExchange (33)
+                                                               :     +- * Filter (32)
+                                                               :        +- TableCacheQueryStage (31), Statistics(sizeInBytes=104.8 KiB, rowCount=958)
+                                                               :           +- InMemoryTableScan (5) (columnarIn=false, columnarOut=true)
+                                                               :                 +- InMemoryRelation (6)
+                                                               :                       +- AdaptiveSparkPlan (30)
+                                 +- == Final Plan ==
+                                    ResultQueryStage (22)
+                                    +- * Project (21)
+                                       +- * HashAggregate (20)
+                                          +- ShuffleQueryStage (19), Statistics(sizeInBytes=104.8 KiB, rowCount=958)
+                                             +- Exchange (18)
+                                                +- * HashAggregate (17)
+                                                   +- * HashAggregate (16)
+                                                      +- AQEShuffleRead (15)
+                                                         +- ShuffleQueryStage (14), Statistics(sizeInBytes=1194.0 KiB, rowCount=6.95E+3)
+                                                            +- Exchange (13)
+                                                               +- * HashAggregate (12)
+                                                                  +- TableCacheQueryStage (11), Statistics(sizeInBytes=401.0 MiB, rowCount=2.24E+6)
+                                                                     +- InMemoryTableScan (7)
+                                                                           +- InMemoryRelation (8)
+                                                                                 +- * ColumnarToRow (10)
+                                                                                    +- Scan parquet  (9)
+                                 +- == Initial Plan ==
+                                    Project (29)
+                                    +- HashAggregate (28)
+                                       +- Exchange (27)
+                                          +- HashAggregate (26)
+                                             +- HashAggregate (25)
+                                                +- Exchange (24)
+                                                   +- HashAggregate (23)
+                                                      +- InMemoryTableScan (7)
+                                                            +- InMemoryRelation (8)
+                                                                  +- * ColumnarToRow (10)
+                                                                     +- Scan parquet  (9)
+                                                               +- * Filter (62)
+                                                                  +- TableCacheQueryStage (61), Statistics(sizeInBytes=5.1 MiB, rowCount=1.22E+5)
+                                                                     +- InMemoryTableScan (35) (columnarIn=false, columnarOut=true)
+                                                                           +- InMemoryRelation (36)
+                                                                                 +- AdaptiveSparkPlan (60)
+                           +- == Final Plan ==
+                              ResultQueryStage (51)
+                              +- * HashAggregate (50)
+                                 +- * HashAggregate (49)
+                                    +- * Project (48)
+                                       +- Window (47)
+                                          +- * Sort (46)
+                                             +- Window (45)
+                                                +- * Sort (44)
+                                                   +- ShuffleQueryStage (43), Statistics(sizeInBytes=446.6 MiB, rowCount=7.32E+6)
+                                                      +- Exchange (42)
+                                                         +- TableCacheQueryStage (41), Statistics(sizeInBytes=502.5 MiB, rowCount=7.32E+6)
+                                                            +- InMemoryTableScan (37)
+                                                                  +- InMemoryRelation (38)
+                                                                        +- * ColumnarToRow (40)
+                                                                           +- Scan parquet  (39)
+                           +- == Initial Plan ==
+                              HashAggregate (59)
+                              +- HashAggregate (58)
+                                 +- Project (57)
+                                    +- Window (56)
+                                       +- Sort (55)
+                                          +- Window (54)
+                                             +- Sort (53)
+                                                +- Exchange (52)
+                                                   +- InMemoryTableScan (37)
+                                                         +- InMemoryRelation (38)
+                                                               +- * ColumnarToRow (40)
+                                                                  +- Scan parquet  (39)
+                                                      +- == Initial Plan ==
+                                                         Project (70)
+                                                         +- BroadcastHashJoin Inner BuildLeft (69)
+                                                            :- BroadcastExchange (67)
+                                                            :  +- Filter (66)
+                                                            :     +- InMemoryTableScan (5) (columnarIn=false, columnarOut=true)
+                                                            :           +- InMemoryRelation (6)
+                                                            :                 +- AdaptiveSparkPlan (30)
+                        +- == Final Plan ==
+                           ResultQueryStage (22)
+                           +- * Project (21)
+                              +- * HashAggregate (20)
+                                 +- ShuffleQueryStage (19), Statistics(sizeInBytes=104.8 KiB, rowCount=958)
+                                    +- Exchange (18)
+                                       +- * HashAggregate (17)
+                                          +- * HashAggregate (16)
+                                             +- AQEShuffleRead (15)
+                                                +- ShuffleQueryStage (14), Statistics(sizeInBytes=1194.0 KiB, rowCount=6.95E+3)
+                                                   +- Exchange (13)
+                                                      +- * HashAggregate (12)
+                                                         +- TableCacheQueryStage (11), Statistics(sizeInBytes=401.0 MiB, rowCount=2.24E+6)
+                                                            +- InMemoryTableScan (7)
+                                                                  +- InMemoryRelation (8)
+                                                                        +- * ColumnarToRow (10)
+                                                                           +- Scan parquet  (9)
+                        +- == Initial Plan ==
+                           Project (29)
+                           +- HashAggregate (28)
+                              +- Exchange (27)
+                                 +- HashAggregate (26)
+                                    +- HashAggregate (25)
+                                       +- Exchange (24)
+                                          +- HashAggregate (23)
+                                             +- InMemoryTableScan (7)
+                                                   +- InMemoryRelation (8)
+                                                         +- * ColumnarToRow (10)
+                                                            +- Scan parquet  (9)
+                                                            +- Filter (68)
+                                                               +- InMemoryTableScan (35) (columnarIn=false, columnarOut=true)
+                                                                     +- InMemoryRelation (36)
+                                                                           +- AdaptiveSparkPlan (60)
+                     +- == Final Plan ==
+                        ResultQueryStage (51)
+                        +- * HashAggregate (50)
+                           +- * HashAggregate (49)
+                              +- * Project (48)
+                                 +- Window (47)
+                                    +- * Sort (46)
+                                       +- Window (45)
+                                          +- * Sort (44)
+                                             +- ShuffleQueryStage (43), Statistics(sizeInBytes=446.6 MiB, rowCount=7.32E+6)
+                                                +- Exchange (42)
+                                                   +- TableCacheQueryStage (41), Statistics(sizeInBytes=502.5 MiB, rowCount=7.32E+6)
+                                                      +- InMemoryTableScan (37)
+                                                            +- InMemoryRelation (38)
+                                                                  +- * ColumnarToRow (40)
+                                                                     +- Scan parquet  (39)
+                     +- == Initial Plan ==
+                        HashAggregate (59)
+                        +- HashAggregate (58)
+                           +- Project (57)
+                              +- Window (56)
+                                 +- Sort (55)
+                                    +- Window (54)
+                                       +- Sort (53)
+                                          +- Exchange (52)
+                                             +- InMemoryTableScan (37)
+                                                   +- InMemoryRelation (38)
+                                                         +- * ColumnarToRow (40)
+                                                            +- Scan parquet  (39)
+               +- == Initial Plan ==
+                  Project (96)
+                  +- Filter (95)
+                     +- Window (94)
+                        +- Project (93)
+                           +- Window (92)
+                              +- Project (91)
+                                 +- Window (90)
+                                    +- Project (89)
+                                       +- Window (88)
+                                          +- Sort (87)
+                                             +- Exchange (86)
+                                                +- InMemoryTableScan (3) (columnarIn=false, columnarOut=true)
+                                                      +- InMemoryRelation (4)
+                                                            +- AdaptiveSparkPlan (71)
+                                             +- == Final Plan ==
+                                                ResultQueryStage (65)
+                                                +- * Project (64)
+                                                   +- * BroadcastHashJoin Inner BuildLeft (63)
+                                                      :- BroadcastQueryStage (34), Statistics(sizeInBytes=1056.0 KiB, rowCount=958)
+                                                      :  +- BroadcastExchange (33)
+                                                      :     +- * Filter (32)
+                                                      :        +- TableCacheQueryStage (31), Statistics(sizeInBytes=104.8 KiB, rowCount=958)
+                                                      :           +- InMemoryTableScan (5) (columnarIn=false, columnarOut=true)
+                                                      :                 +- InMemoryRelation (6)
+                                                      :                       +- AdaptiveSparkPlan (30)
+                                 +- == Final Plan ==
+                                    ResultQueryStage (22)
+                                    +- * Project (21)
+                                       +- * HashAggregate (20)
+                                          +- ShuffleQueryStage (19), Statistics(sizeInBytes=104.8 KiB, rowCount=958)
+                                             +- Exchange (18)
+                                                +- * HashAggregate (17)
+                                                   +- * HashAggregate (16)
+                                                      +- AQEShuffleRead (15)
+                                                         +- ShuffleQueryStage (14), Statistics(sizeInBytes=1194.0 KiB, rowCount=6.95E+3)
+                                                            +- Exchange (13)
+                                                               +- * HashAggregate (12)
+                                                                  +- TableCacheQueryStage (11), Statistics(sizeInBytes=401.0 MiB, rowCount=2.24E+6)
+                                                                     +- InMemoryTableScan (7)
+                                                                           +- InMemoryRelation (8)
+                                                                                 +- * ColumnarToRow (10)
+                                                                                    +- Scan parquet  (9)
+                                 +- == Initial Plan ==
+                                    Project (29)
+                                    +- HashAggregate (28)
+                                       +- Exchange (27)
+                                          +- HashAggregate (26)
+                                             +- HashAggregate (25)
+                                                +- Exchange (24)
+                                                   +- HashAggregate (23)
+                                                      +- InMemoryTableScan (7)
+                                                            +- InMemoryRelation (8)
+                                                                  +- * ColumnarToRow (10)
+                                                                     +- Scan parquet  (9)
+                                                      +- * Filter (62)
+                                                         +- TableCacheQueryStage (61), Statistics(sizeInBytes=5.1 MiB, rowCount=1.22E+5)
+                                                            +- InMemoryTableScan (35) (columnarIn=false, columnarOut=true)
+                                                                  +- InMemoryRelation (36)
+                                                                        +- AdaptiveSparkPlan (60)
+                           +- == Final Plan ==
+                              ResultQueryStage (51)
+                              +- * HashAggregate (50)
+                                 +- * HashAggregate (49)
+                                    +- * Project (48)
+                                       +- Window (47)
+                                          +- * Sort (46)
+                                             +- Window (45)
+                                                +- * Sort (44)
+                                                   +- ShuffleQueryStage (43), Statistics(sizeInBytes=446.6 MiB, rowCount=7.32E+6)
+                                                      +- Exchange (42)
+                                                         +- TableCacheQueryStage (41), Statistics(sizeInBytes=502.5 MiB, rowCount=7.32E+6)
+                                                            +- InMemoryTableScan (37)
+                                                                  +- InMemoryRelation (38)
+                                                                        +- * ColumnarToRow (40)
+                                                                           +- Scan parquet  (39)
+                           +- == Initial Plan ==
+                              HashAggregate (59)
+                              +- HashAggregate (58)
+                                 +- Project (57)
+                                    +- Window (56)
+                                       +- Sort (55)
+                                          +- Window (54)
+                                             +- Sort (53)
+                                                +- Exchange (52)
+                                                   +- InMemoryTableScan (37)
+                                                         +- InMemoryRelation (38)
+                                                               +- * ColumnarToRow (40)
+                                                                  +- Scan parquet  (39)
+                                             +- == Initial Plan ==
+                                                Project (70)
+                                                +- BroadcastHashJoin Inner BuildLeft (69)
+                                                   :- BroadcastExchange (67)
+                                                   :  +- Filter (66)
+                                                   :     +- InMemoryTableScan (5) (columnarIn=false, columnarOut=true)
+                                                   :           +- InMemoryRelation (6)
+                                                   :                 +- AdaptiveSparkPlan (30)
+                        +- == Final Plan ==
+                           ResultQueryStage (22)
+                           +- * Project (21)
+                              +- * HashAggregate (20)
+                                 +- ShuffleQueryStage (19), Statistics(sizeInBytes=104.8 KiB, rowCount=958)
+                                    +- Exchange (18)
+                                       +- * HashAggregate (17)
+                                          +- * HashAggregate (16)
+                                             +- AQEShuffleRead (15)
+                                                +- ShuffleQueryStage (14), Statistics(sizeInBytes=1194.0 KiB, rowCount=6.95E+3)
+                                                   +- Exchange (13)
+                                                      +- * HashAggregate (12)
+                                                         +- TableCacheQueryStage (11), Statistics(sizeInBytes=401.0 MiB, rowCount=2.24E+6)
+                                                            +- InMemoryTableScan (7)
+                                                                  +- InMemoryRelation (8)
+                                                                        +- * ColumnarToRow (10)
+                                                                           +- Scan parquet  (9)
+                        +- == Initial Plan ==
+                           Project (29)
+                           +- HashAggregate (28)
+                              +- Exchange (27)
+                                 +- HashAggregate (26)
+                                    +- HashAggregate (25)
+                                       +- Exchange (24)
+                                          +- HashAggregate (23)
+                                             +- InMemoryTableScan (7)
+                                                   +- InMemoryRelation (8)
+                                                         +- * ColumnarToRow (10)
+                                                            +- Scan parquet  (9)
+                                                   +- Filter (68)
+                                                      +- InMemoryTableScan (35) (columnarIn=false, columnarOut=true)
+                                                            +- InMemoryRelation (36)
+                                                                  +- AdaptiveSparkPlan (60)
+                     +- == Final Plan ==
+                        ResultQueryStage (51)
+                        +- * HashAggregate (50)
+                           +- * HashAggregate (49)
+                              +- * Project (48)
+                                 +- Window (47)
+                                    +- * Sort (46)
+                                       +- Window (45)
+                                          +- * Sort (44)
+                                             +- ShuffleQueryStage (43), Statistics(sizeInBytes=446.6 MiB, rowCount=7.32E+6)
+                                                +- Exchange (42)
+                                                   +- TableCacheQueryStage (41), Statistics(sizeInBytes=502.5 MiB, rowCount=7.32E+6)
+                                                      +- InMemoryTableScan (37)
+                                                            +- InMemoryRelation (38)
+                                                                  +- * ColumnarToRow (40)
+                                                                     +- Scan parquet  (39)
+                     +- == Initial Plan ==
+                        HashAggregate (59)
+                        +- HashAggregate (58)
+                           +- Project (57)
+                              +- Window (56)
+                                 +- Sort (55)
+                                    +- Window (54)
+                                       +- Sort (53)
+                                          +- Exchange (52)
+                                             +- InMemoryTableScan (37)
+                                                   +- InMemoryRelation (38)
+                                                         +- * ColumnarToRow (40)
+                                                            +- Scan parquet  (39)
+
+
+(1) InMemoryTableScan
+Output [40]: [timestamp_hour#4L, tx_count#1481L, n_blocks#1482L, volume_sats#1483L, avg_tx_sats#1484, avg_block_size#1485, total_block_size#1486L, whale_tx_count#1487L, whale_volume_sats#1488L, coinbase_count#1489L, miner_issuance_sats#1490L, volume_btc#1512, whale_volume_btc#1513, miner_issuance_btc#1514, open#2696, high#2697, low#2698, close#2699, volume_exchange#2700, close_lag1#4770, close_lag24#4771, return_1h#4772, return_24h#4773, volatility_24h#4774, nvt_like#4784, onchain_vs_exchange#4785, tx_count_ma24#4786, volume_btc_ma24#4788, whale_tx_ma24#4790, miner_issuance_ma24#4792, tx_count_std24#4794, tx_count_zscore#4821, whale_std24#4822, whale_zscore#4849, issuance_std24#4850, issuance_zscore#4860, hour_of_day#4861, day_of_week#4862, close_next#4863, label#4864]
+Arguments: [timestamp_hour#4L, tx_count#1481L, n_blocks#1482L, volume_sats#1483L, avg_tx_sats#1484, avg_block_size#1485, total_block_size#1486L, whale_tx_count#1487L, whale_volume_sats#1488L, coinbase_count#1489L, miner_issuance_sats#1490L, volume_btc#1512, whale_volume_btc#1513, miner_issuance_btc#1514, open#2696, high#2697, low#2698, close#2699, volume_exchange#2700, close_lag1#4770, close_lag24#4771, return_1h#4772, return_24h#4773, volatility_24h#4774, nvt_like#4784, ... 15 more fields]
+
+(2) InMemoryRelation
+Arguments: [timestamp_hour#4L, tx_count#1481L, n_blocks#1482L, volume_sats#1483L, avg_tx_sats#1484, avg_block_size#1485, total_block_size#1486L, whale_tx_count#1487L, whale_volume_sats#1488L, coinbase_count#1489L, miner_issuance_sats#1490L, volume_btc#1512, whale_volume_btc#1513, miner_issuance_btc#1514, open#2696, high#2697, low#2698, close#2699, volume_exchange#2700, close_lag1#4770, close_lag24#4771, return_1h#4772, return_24h#4773, volatility_24h#4774, nvt_like#4784, ... 15 more fields], StorageLevel(disk, memory, deserialized, 1 replicas)
+
+(3) InMemoryTableScan
+Output [19]: [timestamp_hour#4L, tx_count#1481L, n_blocks#1482L, volume_sats#1483L, avg_tx_sats#1484, avg_block_size#1485, total_block_size#1486L, whale_tx_count#1487L, whale_volume_sats#1488L, coinbase_count#1489L, miner_issuance_sats#1490L, volume_btc#1512, whale_volume_btc#1513, miner_issuance_btc#1514, open#2696, high#2697, low#2698, close#2699, volume_exchange#2700]
+Arguments: [timestamp_hour#4L, tx_count#1481L, n_blocks#1482L, volume_sats#1483L, avg_tx_sats#1484, avg_block_size#1485, total_block_size#1486L, whale_tx_count#1487L, whale_volume_sats#1488L, coinbase_count#1489L, miner_issuance_sats#1490L, volume_btc#1512, whale_volume_btc#1513, miner_issuance_btc#1514, open#2696, high#2697, low#2698, close#2699, volume_exchange#2700]
+
+(4) InMemoryRelation
+Arguments: [timestamp_hour#4L, tx_count#1481L, n_blocks#1482L, volume_sats#1483L, avg_tx_sats#1484, avg_block_size#1485, total_block_size#1486L, whale_tx_count#1487L, whale_volume_sats#1488L, coinbase_count#1489L, miner_issuance_sats#1490L, volume_btc#1512, whale_volume_btc#1513, miner_issuance_btc#1514, open#2696, high#2697, low#2698, close#2699, volume_exchange#2700], StorageLevel(disk, memory, deserialized, 1 replicas)
+
+(5) InMemoryTableScan
+Output [14]: [timestamp_hour#4L, tx_count#1481L, n_blocks#1482L, volume_sats#1483L, avg_tx_sats#1484, avg_block_size#1485, total_block_size#1486L, whale_tx_count#1487L, whale_volume_sats#1488L, coinbase_count#1489L, miner_issuance_sats#1490L, volume_btc#1512, whale_volume_btc#1513, miner_issuance_btc#1514]
+Arguments: [timestamp_hour#4L, tx_count#1481L, n_blocks#1482L, volume_sats#1483L, avg_tx_sats#1484, avg_block_size#1485, total_block_size#1486L, whale_tx_count#1487L, whale_volume_sats#1488L, coinbase_count#1489L, miner_issuance_sats#1490L, volume_btc#1512, whale_volume_btc#1513, miner_issuance_btc#1514], [isnotnull(timestamp_hour#4L)]
+
+(6) InMemoryRelation
+Arguments: [timestamp_hour#4L, tx_count#1481L, n_blocks#1482L, volume_sats#1483L, avg_tx_sats#1484, avg_block_size#1485, total_block_size#1486L, whale_tx_count#1487L, whale_volume_sats#1488L, coinbase_count#1489L, miner_issuance_sats#1490L, volume_btc#1512, whale_volume_btc#1513, miner_issuance_btc#1514], StorageLevel(disk, memory, deserialized, 1 replicas)
+
+(7) InMemoryTableScan
+Output [6]: [tx_id#0, block_hash#1, timestamp_hour#4L, n_inputs#7, amount_sats#9L, block_size#10]
+Arguments: [tx_id#0, block_hash#1, timestamp_hour#4L, n_inputs#7, amount_sats#9L, block_size#10]
+
+(8) InMemoryRelation
+Arguments: [tx_id#0, block_hash#1, timestamp#2L, datetime#3, timestamp_hour#4L, date#5, hour#6, n_inputs#7, n_outputs#8, amount_sats#9L, block_size#10], StorageLevel(disk, memory, deserialized, 1 replicas)
+
+(9) Scan parquet 
+Output [11]: [tx_id#0, block_hash#1, timestamp#2L, datetime#3, timestamp_hour#4L, date#5, hour#6, n_inputs#7, n_outputs#8, amount_sats#9L, block_size#10]
+Batched: true
+Location: InMemoryFileIndex [file:/home/img/BigData/Project/data/output/transactions_parquet]
+ReadSchema: struct<tx_id:string,block_hash:string,timestamp:bigint,datetime:timestamp,timestamp_hour:bigint,date:date,hour:int,n_inputs:int,n_outputs:int,amount_sats:bigint,block_size:int>
+
+(10) ColumnarToRow [codegen id : 1]
+Input [11]: [tx_id#0, block_hash#1, timestamp#2L, datetime#3, timestamp_hour#4L, date#5, hour#6, n_inputs#7, n_outputs#8, amount_sats#9L, block_size#10]
+
+(11) TableCacheQueryStage
+Output [6]: [tx_id#0, block_hash#1, timestamp_hour#4L, n_inputs#7, amount_sats#9L, block_size#10]
+Arguments: 0
+
+(12) HashAggregate [codegen id : 1]
+Input [6]: [tx_id#0, block_hash#1, timestamp_hour#4L, n_inputs#7, amount_sats#9L, block_size#10]
+Keys [2]: [timestamp_hour#4L, block_hash#1]
+Functions [9]: [partial_count(tx_id#0), partial_sum(amount_sats#9L), partial_avg(amount_sats#9L), partial_avg(block_size#10), partial_sum(block_size#10), partial_sum(CASE WHEN (cast(amount_sats#9L as double) > 9.0993E12) THEN 1 ELSE 0 END), partial_sum(CASE WHEN (cast(amount_sats#9L as double) > 9.0993E12) THEN amount_sats#9L ELSE 0 END), partial_sum(CASE WHEN (n_inputs#7 = 0) THEN 1 ELSE 0 END), partial_sum(CASE WHEN (n_inputs#7 = 0) THEN amount_sats#9L ELSE 0 END)]
+Aggregate Attributes [9]: [count(tx_id#0)#1502L, sum(amount_sats#9L)#1504L, avg(amount_sats#9L)#1505, avg(block_size#10)#1506, sum(block_size#10)#1507L, sum(CASE WHEN (cast(amount_sats#9L as double) > 9.0993E12) THEN 1 ELSE 0 END)#1509L, sum(CASE WHEN (cast(amount_sats#9L as double) > 9.0993E12) THEN amount_sats#9L ELSE 0 END)#1510L, sum(CASE WHEN (n_inputs#7 = 0) THEN 1 ELSE 0 END)#1508L, sum(CASE WHEN (n_inputs#7 = 0) THEN amount_sats#9L ELSE 0 END)#1511L]
+Results [13]: [timestamp_hour#4L, block_hash#1, count#1681L, sum#1683L, sum#1686, count#1687L, sum#1690, count#1691L, sum#1693L, sum#1695L, sum#1697L, sum#1699L, sum#1701L]
+
+(13) Exchange
+Input [13]: [timestamp_hour#4L, block_hash#1, count#1681L, sum#1683L, sum#1686, count#1687L, sum#1690, count#1691L, sum#1693L, sum#1695L, sum#1697L, sum#1699L, sum#1701L]
+Arguments: hashpartitioning(timestamp_hour#4L, block_hash#1, 200), ENSURE_REQUIREMENTS, [plan_id=316]
+
+(14) ShuffleQueryStage
+Output [13]: [timestamp_hour#4L, block_hash#1, count#1681L, sum#1683L, sum#1686, count#1687L, sum#1690, count#1691L, sum#1693L, sum#1695L, sum#1697L, sum#1699L, sum#1701L]
+Arguments: 1
+
+(15) AQEShuffleRead
+Input [13]: [timestamp_hour#4L, block_hash#1, count#1681L, sum#1683L, sum#1686, count#1687L, sum#1690, count#1691L, sum#1693L, sum#1695L, sum#1697L, sum#1699L, sum#1701L]
+Arguments: coalesced
+
+(16) HashAggregate [codegen id : 2]
+Input [13]: [timestamp_hour#4L, block_hash#1, count#1681L, sum#1683L, sum#1686, count#1687L, sum#1690, count#1691L, sum#1693L, sum#1695L, sum#1697L, sum#1699L, sum#1701L]
+Keys [2]: [timestamp_hour#4L, block_hash#1]
+Functions [9]: [merge_count(tx_id#0), merge_sum(amount_sats#9L), merge_avg(amount_sats#9L), merge_avg(block_size#10), merge_sum(block_size#10), merge_sum(CASE WHEN (cast(amount_sats#9L as double) > 9.0993E12) THEN 1 ELSE 0 END), merge_sum(CASE WHEN (cast(amount_sats#9L as double) > 9.0993E12) THEN amount_sats#9L ELSE 0 END), merge_sum(CASE WHEN (n_inputs#7 = 0) THEN 1 ELSE 0 END), merge_sum(CASE WHEN (n_inputs#7 = 0) THEN amount_sats#9L ELSE 0 END)]
+Aggregate Attributes [9]: [count(tx_id#0)#1502L, sum(amount_sats#9L)#1504L, avg(amount_sats#9L)#1505, avg(block_size#10)#1506, sum(block_size#10)#1507L, sum(CASE WHEN (cast(amount_sats#9L as double) > 9.0993E12) THEN 1 ELSE 0 END)#1509L, sum(CASE WHEN (cast(amount_sats#9L as double) > 9.0993E12) THEN amount_sats#9L ELSE 0 END)#1510L, sum(CASE WHEN (n_inputs#7 = 0) THEN 1 ELSE 0 END)#1508L, sum(CASE WHEN (n_inputs#7 = 0) THEN amount_sats#9L ELSE 0 END)#1511L]
+Results [13]: [timestamp_hour#4L, block_hash#1, count#1681L, sum#1683L, sum#1686, count#1687L, sum#1690, count#1691L, sum#1693L, sum#1695L, sum#1697L, sum#1699L, sum#1701L]
+
+(17) HashAggregate [codegen id : 2]
+Input [13]: [timestamp_hour#4L, block_hash#1, count#1681L, sum#1683L, sum#1686, count#1687L, sum#1690, count#1691L, sum#1693L, sum#1695L, sum#1697L, sum#1699L, sum#1701L]
+Keys [1]: [timestamp_hour#4L]
+Functions [10]: [merge_count(tx_id#0), merge_sum(amount_sats#9L), merge_avg(amount_sats#9L), merge_avg(block_size#10), merge_sum(block_size#10), merge_sum(CASE WHEN (cast(amount_sats#9L as double) > 9.0993E12) THEN 1 ELSE 0 END), merge_sum(CASE WHEN (cast(amount_sats#9L as double) > 9.0993E12) THEN amount_sats#9L ELSE 0 END), merge_sum(CASE WHEN (n_inputs#7 = 0) THEN 1 ELSE 0 END), merge_sum(CASE WHEN (n_inputs#7 = 0) THEN amount_sats#9L ELSE 0 END), partial_count(distinct block_hash#1)]
+Aggregate Attributes [10]: [count(tx_id#0)#1502L, sum(amount_sats#9L)#1504L, avg(amount_sats#9L)#1505, avg(block_size#10)#1506, sum(block_size#10)#1507L, sum(CASE WHEN (cast(amount_sats#9L as double) > 9.0993E12) THEN 1 ELSE 0 END)#1509L, sum(CASE WHEN (cast(amount_sats#9L as double) > 9.0993E12) THEN amount_sats#9L ELSE 0 END)#1510L, sum(CASE WHEN (n_inputs#7 = 0) THEN 1 ELSE 0 END)#1508L, sum(CASE WHEN (n_inputs#7 = 0) THEN amount_sats#9L ELSE 0 END)#1511L, count(block_hash#1)#1503L]
+Results [13]: [timestamp_hour#4L, count#1681L, sum#1683L, sum#1686, count#1687L, sum#1690, count#1691L, sum#1693L, sum#1695L, sum#1697L, sum#1699L, sum#1701L, count#1704L]
+
+(18) Exchange
+Input [13]: [timestamp_hour#4L, count#1681L, sum#1683L, sum#1686, count#1687L, sum#1690, count#1691L, sum#1693L, sum#1695L, sum#1697L, sum#1699L, sum#1701L, count#1704L]
+Arguments: hashpartitioning(timestamp_hour#4L, 200), ENSURE_REQUIREMENTS, [plan_id=346]
+
+(19) ShuffleQueryStage
+Output [13]: [timestamp_hour#4L, count#1681L, sum#1683L, sum#1686, count#1687L, sum#1690, count#1691L, sum#1693L, sum#1695L, sum#1697L, sum#1699L, sum#1701L, count#1704L]
+Arguments: 2
+
+(20) HashAggregate [codegen id : 3]
+Input [13]: [timestamp_hour#4L, count#1681L, sum#1683L, sum#1686, count#1687L, sum#1690, count#1691L, sum#1693L, sum#1695L, sum#1697L, sum#1699L, sum#1701L, count#1704L]
+Keys [1]: [timestamp_hour#4L]
+Functions [10]: [count(tx_id#0), sum(amount_sats#9L), avg(amount_sats#9L), avg(block_size#10), sum(block_size#10), sum(CASE WHEN (cast(amount_sats#9L as double) > 9.0993E12) THEN 1 ELSE 0 END), sum(CASE WHEN (cast(amount_sats#9L as double) > 9.0993E12) THEN amount_sats#9L ELSE 0 END), sum(CASE WHEN (n_inputs#7 = 0) THEN 1 ELSE 0 END), sum(CASE WHEN (n_inputs#7 = 0) THEN amount_sats#9L ELSE 0 END), count(distinct block_hash#1)]
+Aggregate Attributes [10]: [count(tx_id#0)#1502L, sum(amount_sats#9L)#1504L, avg(amount_sats#9L)#1505, avg(block_size#10)#1506, sum(block_size#10)#1507L, sum(CASE WHEN (cast(amount_sats#9L as double) > 9.0993E12) THEN 1 ELSE 0 END)#1509L, sum(CASE WHEN (cast(amount_sats#9L as double) > 9.0993E12) THEN amount_sats#9L ELSE 0 END)#1510L, sum(CASE WHEN (n_inputs#7 = 0) THEN 1 ELSE 0 END)#1508L, sum(CASE WHEN (n_inputs#7 = 0) THEN amount_sats#9L ELSE 0 END)#1511L, count(block_hash#1)#1503L]
+Results [11]: [timestamp_hour#4L, count(tx_id#0)#1502L AS tx_count#1481L, count(block_hash#1)#1503L AS n_blocks#1482L, sum(amount_sats#9L)#1504L AS volume_sats#1483L, avg(amount_sats#9L)#1505 AS avg_tx_sats#1484, avg(block_size#10)#1506 AS avg_block_size#1485, sum(block_size#10)#1507L AS total_block_size#1486L, sum(CASE WHEN (cast(amount_sats#9L as double) > 9.0993E12) THEN 1 ELSE 0 END)#1509L AS whale_tx_count#1487L, sum(CASE WHEN (cast(amount_sats#9L as double) > 9.0993E12) THEN amount_sats#9L ELSE 0 END)#1510L AS whale_volume_sats#1488L, sum(CASE WHEN (n_inputs#7 = 0) THEN 1 ELSE 0 END)#1508L AS coinbase_count#1489L, sum(CASE WHEN (n_inputs#7 = 0) THEN amount_sats#9L ELSE 0 END)#1511L AS miner_issuance_sats#1490L]
+
+(21) Project [codegen id : 3]
+Output [14]: [timestamp_hour#4L, tx_count#1481L, n_blocks#1482L, volume_sats#1483L, avg_tx_sats#1484, avg_block_size#1485, total_block_size#1486L, whale_tx_count#1487L, whale_volume_sats#1488L, coinbase_count#1489L, miner_issuance_sats#1490L, (cast(volume_sats#1483L as double) / 1.0E8) AS volume_btc#1512, (cast(whale_volume_sats#1488L as double) / 1.0E8) AS whale_volume_btc#1513, (cast(miner_issuance_sats#1490L as double) / 1.0E8) AS miner_issuance_btc#1514]
+Input [11]: [timestamp_hour#4L, tx_count#1481L, n_blocks#1482L, volume_sats#1483L, avg_tx_sats#1484, avg_block_size#1485, total_block_size#1486L, whale_tx_count#1487L, whale_volume_sats#1488L, coinbase_count#1489L, miner_issuance_sats#1490L]
+
+(22) ResultQueryStage
+Output [14]: [timestamp_hour#4L, tx_count#1481L, n_blocks#1482L, volume_sats#1483L, avg_tx_sats#1484, avg_block_size#1485, total_block_size#1486L, whale_tx_count#1487L, whale_volume_sats#1488L, coinbase_count#1489L, miner_issuance_sats#1490L, volume_btc#1512, whale_volume_btc#1513, miner_issuance_btc#1514]
+Arguments: 3
+
+(23) HashAggregate
+Input [6]: [tx_id#0, block_hash#1, timestamp_hour#4L, n_inputs#7, amount_sats#9L, block_size#10]
+Keys [2]: [timestamp_hour#4L, block_hash#1]
+Functions [9]: [partial_count(tx_id#0), partial_sum(amount_sats#9L), partial_avg(amount_sats#9L), partial_avg(block_size#10), partial_sum(block_size#10), partial_sum(CASE WHEN (cast(amount_sats#9L as double) > 9.0993E12) THEN 1 ELSE 0 END), partial_sum(CASE WHEN (cast(amount_sats#9L as double) > 9.0993E12) THEN amount_sats#9L ELSE 0 END), partial_sum(CASE WHEN (n_inputs#7 = 0) THEN 1 ELSE 0 END), partial_sum(CASE WHEN (n_inputs#7 = 0) THEN amount_sats#9L ELSE 0 END)]
+Aggregate Attributes [9]: [count(tx_id#0)#1502L, sum(amount_sats#9L)#1504L, avg(amount_sats#9L)#1505, avg(block_size#10)#1506, sum(block_size#10)#1507L, sum(CASE WHEN (cast(amount_sats#9L as double) > 9.0993E12) THEN 1 ELSE 0 END)#1509L, sum(CASE WHEN (cast(amount_sats#9L as double) > 9.0993E12) THEN amount_sats#9L ELSE 0 END)#1510L, sum(CASE WHEN (n_inputs#7 = 0) THEN 1 ELSE 0 END)#1508L, sum(CASE WHEN (n_inputs#7 = 0) THEN amount_sats#9L ELSE 0 END)#1511L]
+Results [13]: [timestamp_hour#4L, block_hash#1, count#1681L, sum#1683L, sum#1686, count#1687L, sum#1690, count#1691L, sum#1693L, sum#1695L, sum#1697L, sum#1699L, sum#1701L]
+
+(24) Exchange
+Input [13]: [timestamp_hour#4L, block_hash#1, count#1681L, sum#1683L, sum#1686, count#1687L, sum#1690, count#1691L, sum#1693L, sum#1695L, sum#1697L, sum#1699L, sum#1701L]
+Arguments: hashpartitioning(timestamp_hour#4L, block_hash#1, 200), ENSURE_REQUIREMENTS, [plan_id=236]
+
+(25) HashAggregate
+Input [13]: [timestamp_hour#4L, block_hash#1, count#1681L, sum#1683L, sum#1686, count#1687L, sum#1690, count#1691L, sum#1693L, sum#1695L, sum#1697L, sum#1699L, sum#1701L]
+Keys [2]: [timestamp_hour#4L, block_hash#1]
+Functions [9]: [merge_count(tx_id#0), merge_sum(amount_sats#9L), merge_avg(amount_sats#9L), merge_avg(block_size#10), merge_sum(block_size#10), merge_sum(CASE WHEN (cast(amount_sats#9L as double) > 9.0993E12) THEN 1 ELSE 0 END), merge_sum(CASE WHEN (cast(amount_sats#9L as double) > 9.0993E12) THEN amount_sats#9L ELSE 0 END), merge_sum(CASE WHEN (n_inputs#7 = 0) THEN 1 ELSE 0 END), merge_sum(CASE WHEN (n_inputs#7 = 0) THEN amount_sats#9L ELSE 0 END)]
+Aggregate Attributes [9]: [count(tx_id#0)#1502L, sum(amount_sats#9L)#1504L, avg(amount_sats#9L)#1505, avg(block_size#10)#1506, sum(block_size#10)#1507L, sum(CASE WHEN (cast(amount_sats#9L as double) > 9.0993E12) THEN 1 ELSE 0 END)#1509L, sum(CASE WHEN (cast(amount_sats#9L as double) > 9.0993E12) THEN amount_sats#9L ELSE 0 END)#1510L, sum(CASE WHEN (n_inputs#7 = 0) THEN 1 ELSE 0 END)#1508L, sum(CASE WHEN (n_inputs#7 = 0) THEN amount_sats#9L ELSE 0 END)#1511L]
+Results [13]: [timestamp_hour#4L, block_hash#1, count#1681L, sum#1683L, sum#1686, count#1687L, sum#1690, count#1691L, sum#1693L, sum#1695L, sum#1697L, sum#1699L, sum#1701L]
+
+(26) HashAggregate
+Input [13]: [timestamp_hour#4L, block_hash#1, count#1681L, sum#1683L, sum#1686, count#1687L, sum#1690, count#1691L, sum#1693L, sum#1695L, sum#1697L, sum#1699L, sum#1701L]
+Keys [1]: [timestamp_hour#4L]
+Functions [10]: [merge_count(tx_id#0), merge_sum(amount_sats#9L), merge_avg(amount_sats#9L), merge_avg(block_size#10), merge_sum(block_size#10), merge_sum(CASE WHEN (cast(amount_sats#9L as double) > 9.0993E12) THEN 1 ELSE 0 END), merge_sum(CASE WHEN (cast(amount_sats#9L as double) > 9.0993E12) THEN amount_sats#9L ELSE 0 END), merge_sum(CASE WHEN (n_inputs#7 = 0) THEN 1 ELSE 0 END), merge_sum(CASE WHEN (n_inputs#7 = 0) THEN amount_sats#9L ELSE 0 END), partial_count(distinct block_hash#1)]
+Aggregate Attributes [10]: [count(tx_id#0)#1502L, sum(amount_sats#9L)#1504L, avg(amount_sats#9L)#1505, avg(block_size#10)#1506, sum(block_size#10)#1507L, sum(CASE WHEN (cast(amount_sats#9L as double) > 9.0993E12) THEN 1 ELSE 0 END)#1509L, sum(CASE WHEN (cast(amount_sats#9L as double) > 9.0993E12) THEN amount_sats#9L ELSE 0 END)#1510L, sum(CASE WHEN (n_inputs#7 = 0) THEN 1 ELSE 0 END)#1508L, sum(CASE WHEN (n_inputs#7 = 0) THEN amount_sats#9L ELSE 0 END)#1511L, count(block_hash#1)#1503L]
+Results [13]: [timestamp_hour#4L, count#1681L, sum#1683L, sum#1686, count#1687L, sum#1690, count#1691L, sum#1693L, sum#1695L, sum#1697L, sum#1699L, sum#1701L, count#1704L]
+
+(27) Exchange
+Input [13]: [timestamp_hour#4L, count#1681L, sum#1683L, sum#1686, count#1687L, sum#1690, count#1691L, sum#1693L, sum#1695L, sum#1697L, sum#1699L, sum#1701L, count#1704L]
+Arguments: hashpartitioning(timestamp_hour#4L, 200), ENSURE_REQUIREMENTS, [plan_id=240]
+
+(28) HashAggregate
+Input [13]: [timestamp_hour#4L, count#1681L, sum#1683L, sum#1686, count#1687L, sum#1690, count#1691L, sum#1693L, sum#1695L, sum#1697L, sum#1699L, sum#1701L, count#1704L]
+Keys [1]: [timestamp_hour#4L]
+Functions [10]: [count(tx_id#0), sum(amount_sats#9L), avg(amount_sats#9L), avg(block_size#10), sum(block_size#10), sum(CASE WHEN (cast(amount_sats#9L as double) > 9.0993E12) THEN 1 ELSE 0 END), sum(CASE WHEN (cast(amount_sats#9L as double) > 9.0993E12) THEN amount_sats#9L ELSE 0 END), sum(CASE WHEN (n_inputs#7 = 0) THEN 1 ELSE 0 END), sum(CASE WHEN (n_inputs#7 = 0) THEN amount_sats#9L ELSE 0 END), count(distinct block_hash#1)]
+Aggregate Attributes [10]: [count(tx_id#0)#1502L, sum(amount_sats#9L)#1504L, avg(amount_sats#9L)#1505, avg(block_size#10)#1506, sum(block_size#10)#1507L, sum(CASE WHEN (cast(amount_sats#9L as double) > 9.0993E12) THEN 1 ELSE 0 END)#1509L, sum(CASE WHEN (cast(amount_sats#9L as double) > 9.0993E12) THEN amount_sats#9L ELSE 0 END)#1510L, sum(CASE WHEN (n_inputs#7 = 0) THEN 1 ELSE 0 END)#1508L, sum(CASE WHEN (n_inputs#7 = 0) THEN amount_sats#9L ELSE 0 END)#1511L, count(block_hash#1)#1503L]
+Results [11]: [timestamp_hour#4L, count(tx_id#0)#1502L AS tx_count#1481L, count(block_hash#1)#1503L AS n_blocks#1482L, sum(amount_sats#9L)#1504L AS volume_sats#1483L, avg(amount_sats#9L)#1505 AS avg_tx_sats#1484, avg(block_size#10)#1506 AS avg_block_size#1485, sum(block_size#10)#1507L AS total_block_size#1486L, sum(CASE WHEN (cast(amount_sats#9L as double) > 9.0993E12) THEN 1 ELSE 0 END)#1509L AS whale_tx_count#1487L, sum(CASE WHEN (cast(amount_sats#9L as double) > 9.0993E12) THEN amount_sats#9L ELSE 0 END)#1510L AS whale_volume_sats#1488L, sum(CASE WHEN (n_inputs#7 = 0) THEN 1 ELSE 0 END)#1508L AS coinbase_count#1489L, sum(CASE WHEN (n_inputs#7 = 0) THEN amount_sats#9L ELSE 0 END)#1511L AS miner_issuance_sats#1490L]
+
+(29) Project
+Output [14]: [timestamp_hour#4L, tx_count#1481L, n_blocks#1482L, volume_sats#1483L, avg_tx_sats#1484, avg_block_size#1485, total_block_size#1486L, whale_tx_count#1487L, whale_volume_sats#1488L, coinbase_count#1489L, miner_issuance_sats#1490L, (cast(volume_sats#1483L as double) / 1.0E8) AS volume_btc#1512, (cast(whale_volume_sats#1488L as double) / 1.0E8) AS whale_volume_btc#1513, (cast(miner_issuance_sats#1490L as double) / 1.0E8) AS miner_issuance_btc#1514]
+Input [11]: [timestamp_hour#4L, tx_count#1481L, n_blocks#1482L, volume_sats#1483L, avg_tx_sats#1484, avg_block_size#1485, total_block_size#1486L, whale_tx_count#1487L, whale_volume_sats#1488L, coinbase_count#1489L, miner_issuance_sats#1490L]
+
+(30) AdaptiveSparkPlan
+Output [14]: [timestamp_hour#4L, tx_count#1481L, n_blocks#1482L, volume_sats#1483L, avg_tx_sats#1484, avg_block_size#1485, total_block_size#1486L, whale_tx_count#1487L, whale_volume_sats#1488L, coinbase_count#1489L, miner_issuance_sats#1490L, volume_btc#1512, whale_volume_btc#1513, miner_issuance_btc#1514]
+Arguments: isFinalPlan=true
+
+(31) TableCacheQueryStage
+Output [14]: [timestamp_hour#4L, tx_count#1481L, n_blocks#1482L, volume_sats#1483L, avg_tx_sats#1484, avg_block_size#1485, total_block_size#1486L, whale_tx_count#1487L, whale_volume_sats#1488L, coinbase_count#1489L, miner_issuance_sats#1490L, volume_btc#1512, whale_volume_btc#1513, miner_issuance_btc#1514]
+Arguments: 0
+
+(32) Filter [codegen id : 1]
+Input [14]: [timestamp_hour#4L, tx_count#1481L, n_blocks#1482L, volume_sats#1483L, avg_tx_sats#1484, avg_block_size#1485, total_block_size#1486L, whale_tx_count#1487L, whale_volume_sats#1488L, coinbase_count#1489L, miner_issuance_sats#1490L, volume_btc#1512, whale_volume_btc#1513, miner_issuance_btc#1514]
+Condition : isnotnull(timestamp_hour#4L)
+
+(33) BroadcastExchange
+Input [14]: [timestamp_hour#4L, tx_count#1481L, n_blocks#1482L, volume_sats#1483L, avg_tx_sats#1484, avg_block_size#1485, total_block_size#1486L, whale_tx_count#1487L, whale_volume_sats#1488L, coinbase_count#1489L, miner_issuance_sats#1490L, volume_btc#1512, whale_volume_btc#1513, miner_issuance_btc#1514]
+Arguments: HashedRelationBroadcastMode(List(input[0, bigint, false]),false), [plan_id=669]
+
+(34) BroadcastQueryStage
+Output [14]: [timestamp_hour#4L, tx_count#1481L, n_blocks#1482L, volume_sats#1483L, avg_tx_sats#1484, avg_block_size#1485, total_block_size#1486L, whale_tx_count#1487L, whale_volume_sats#1488L, coinbase_count#1489L, miner_issuance_sats#1490L, volume_btc#1512, whale_volume_btc#1513, miner_issuance_btc#1514]
+Arguments: 2
+
+(35) InMemoryTableScan
+Output [6]: [timestamp_hour#13L, open#2696, high#2697, low#2698, close#2699, volume_exchange#2700]
+Arguments: [timestamp_hour#13L, open#2696, high#2697, low#2698, close#2699, volume_exchange#2700], [isnotnull(timestamp_hour#13L)]
+
+(36) InMemoryRelation
+Arguments: [timestamp_hour#13L, open#2696, high#2697, low#2698, close#2699, volume_exchange#2700], StorageLevel(disk, memory, deserialized, 1 replicas)
+
+(37) InMemoryTableScan
+Output [7]: [timestamp_unix#11, timestamp_hour#13L, open#16, high#17, low#18, close#19, volume#20]
+Arguments: [timestamp_unix#11, timestamp_hour#13L, open#16, high#17, low#18, close#19, volume#20]
+
+(38) InMemoryRelation
+Arguments: [timestamp_unix#11, datetime#12, timestamp_hour#13L, date#14, hour#15, open#16, high#17, low#18, close#19, volume#20], StorageLevel(disk, memory, deserialized, 1 replicas)
+
+(39) Scan parquet 
+Output [10]: [timestamp_unix#11, datetime#12, timestamp_hour#13L, date#14, hour#15, open#16, high#17, low#18, close#19, volume#20]
+Batched: true
+Location: InMemoryFileIndex [file:/home/img/BigData/Project/data/output/market_parquet]
+ReadSchema: struct<timestamp_unix:double,datetime:timestamp,timestamp_hour:bigint,date:date,hour:int,open:double,high:double,low:double,close:double,volume:double>
+
+(40) ColumnarToRow [codegen id : 1]
+Input [10]: [timestamp_unix#11, datetime#12, timestamp_hour#13L, date#14, hour#15, open#16, high#17, low#18, close#19, volume#20]
+
+(41) TableCacheQueryStage
+Output [7]: [timestamp_unix#11, timestamp_hour#13L, open#16, high#17, low#18, close#19, volume#20]
+Arguments: 0
+
+(42) Exchange
+Input [7]: [timestamp_unix#11, timestamp_hour#13L, open#16, high#17, low#18, close#19, volume#20]
+Arguments: hashpartitioning(timestamp_hour#13L, 200), ENSURE_REQUIREMENTS, [plan_id=471]
+
+(43) ShuffleQueryStage
+Output [7]: [timestamp_unix#11, timestamp_hour#13L, open#16, high#17, low#18, close#19, volume#20]
+Arguments: 1
+
+(44) Sort [codegen id : 1]
+Input [7]: [timestamp_unix#11, timestamp_hour#13L, open#16, high#17, low#18, close#19, volume#20]
+Arguments: [timestamp_hour#13L ASC NULLS FIRST, timestamp_unix#11 ASC NULLS FIRST], false, 0
+
+(45) Window
+Input [7]: [timestamp_unix#11, timestamp_hour#13L, open#16, high#17, low#18, close#19, volume#20]
+Arguments: [row_number() windowspecdefinition(timestamp_hour#13L, timestamp_unix#11 ASC NULLS FIRST, specifiedwindowframe(RowFrame, unboundedpreceding$(), currentrow$())) AS row_asc#2692], [timestamp_hour#13L], [timestamp_unix#11 ASC NULLS FIRST]
+
+(46) Sort [codegen id : 2]
+Input [8]: [timestamp_unix#11, timestamp_hour#13L, open#16, high#17, low#18, close#19, volume#20, row_asc#2692]
+Arguments: [timestamp_hour#13L ASC NULLS FIRST, timestamp_unix#11 DESC NULLS LAST], false, 0
+
+(47) Window
+Input [8]: [timestamp_unix#11, timestamp_hour#13L, open#16, high#17, low#18, close#19, volume#20, row_asc#2692]
+Arguments: [row_number() windowspecdefinition(timestamp_hour#13L, timestamp_unix#11 DESC NULLS LAST, specifiedwindowframe(RowFrame, unboundedpreceding$(), currentrow$())) AS row_desc#2694], [timestamp_hour#13L], [timestamp_unix#11 DESC NULLS LAST]
+
+(48) Project [codegen id : 3]
+Output [8]: [timestamp_hour#13L, open#16, high#17, low#18, close#19, volume#20, row_asc#2692, row_desc#2694]
+Input [9]: [timestamp_unix#11, timestamp_hour#13L, open#16, high#17, low#18, close#19, volume#20, row_asc#2692, row_desc#2694]
+
+(49) HashAggregate [codegen id : 3]
+Input [8]: [timestamp_hour#13L, open#16, high#17, low#18, close#19, volume#20, row_asc#2692, row_desc#2694]
+Keys [1]: [timestamp_hour#13L]
+Functions [5]: [partial_first(CASE WHEN (row_asc#2692 = 1) THEN open#16 END, false), partial_max(high#17), partial_min(low#18), partial_first(CASE WHEN (row_desc#2694 = 1) THEN close#19 END, false), partial_sum(volume#20)]
+Aggregate Attributes [7]: [first#2868, valueSet#2869, max#2870, min#2871, first#2872, valueSet#2873, sum#2874]
+Results [8]: [timestamp_hour#13L, first#2875, valueSet#2876, max#2877, min#2878, first#2879, valueSet#2880, sum#2881]
+
+(50) HashAggregate [codegen id : 3]
+Input [8]: [timestamp_hour#13L, first#2875, valueSet#2876, max#2877, min#2878, first#2879, valueSet#2880, sum#2881]
+Keys [1]: [timestamp_hour#13L]
+Functions [5]: [first(CASE WHEN (row_asc#2692 = 1) THEN open#16 END, false), max(high#17), min(low#18), first(CASE WHEN (row_desc#2694 = 1) THEN close#19 END, false), sum(volume#20)]
+Aggregate Attributes [5]: [first(CASE WHEN (row_asc#2692 = 1) THEN open#16 END)()#2713, max(high#17)#2714, min(low#18)#2715, first(CASE WHEN (row_desc#2694 = 1) THEN close#19 END)()#2716, sum(volume#20)#2717]
+Results [6]: [timestamp_hour#13L, first(CASE WHEN (row_asc#2692 = 1) THEN open#16 END)()#2713 AS open#2696, max(high#17)#2714 AS high#2697, min(low#18)#2715 AS low#2698, first(CASE WHEN (row_desc#2694 = 1) THEN close#19 END)()#2716 AS close#2699, sum(volume#20)#2717 AS volume_exchange#2700]
+
+(51) ResultQueryStage
+Output [6]: [timestamp_hour#13L, open#2696, high#2697, low#2698, close#2699, volume_exchange#2700]
+Arguments: 2
+
+(52) Exchange
+Input [7]: [timestamp_unix#11, timestamp_hour#13L, open#16, high#17, low#18, close#19, volume#20]
+Arguments: hashpartitioning(timestamp_hour#13L, 200), ENSURE_REQUIREMENTS, [plan_id=437]
+
+(53) Sort
+Input [7]: [timestamp_unix#11, timestamp_hour#13L, open#16, high#17, low#18, close#19, volume#20]
+Arguments: [timestamp_hour#13L ASC NULLS FIRST, timestamp_unix#11 ASC NULLS FIRST], false, 0
+
+(54) Window
+Input [7]: [timestamp_unix#11, timestamp_hour#13L, open#16, high#17, low#18, close#19, volume#20]
+Arguments: [row_number() windowspecdefinition(timestamp_hour#13L, timestamp_unix#11 ASC NULLS FIRST, specifiedwindowframe(RowFrame, unboundedpreceding$(), currentrow$())) AS row_asc#2692], [timestamp_hour#13L], [timestamp_unix#11 ASC NULLS FIRST]
+
+(55) Sort
+Input [8]: [timestamp_unix#11, timestamp_hour#13L, open#16, high#17, low#18, close#19, volume#20, row_asc#2692]
+Arguments: [timestamp_hour#13L ASC NULLS FIRST, timestamp_unix#11 DESC NULLS LAST], false, 0
+
+(56) Window
+Input [8]: [timestamp_unix#11, timestamp_hour#13L, open#16, high#17, low#18, close#19, volume#20, row_asc#2692]
+Arguments: [row_number() windowspecdefinition(timestamp_hour#13L, timestamp_unix#11 DESC NULLS LAST, specifiedwindowframe(RowFrame, unboundedpreceding$(), currentrow$())) AS row_desc#2694], [timestamp_hour#13L], [timestamp_unix#11 DESC NULLS LAST]
+
+(57) Project
+Output [8]: [timestamp_hour#13L, open#16, high#17, low#18, close#19, volume#20, row_asc#2692, row_desc#2694]
+Input [9]: [timestamp_unix#11, timestamp_hour#13L, open#16, high#17, low#18, close#19, volume#20, row_asc#2692, row_desc#2694]
+
+(58) HashAggregate
+Input [8]: [timestamp_hour#13L, open#16, high#17, low#18, close#19, volume#20, row_asc#2692, row_desc#2694]
+Keys [1]: [timestamp_hour#13L]
+Functions [5]: [partial_first(CASE WHEN (row_asc#2692 = 1) THEN open#16 END, false), partial_max(high#17), partial_min(low#18), partial_first(CASE WHEN (row_desc#2694 = 1) THEN close#19 END, false), partial_sum(volume#20)]
+Aggregate Attributes [7]: [first#2868, valueSet#2869, max#2870, min#2871, first#2872, valueSet#2873, sum#2874]
+Results [8]: [timestamp_hour#13L, first#2875, valueSet#2876, max#2877, min#2878, first#2879, valueSet#2880, sum#2881]
+
+(59) HashAggregate
+Input [8]: [timestamp_hour#13L, first#2875, valueSet#2876, max#2877, min#2878, first#2879, valueSet#2880, sum#2881]
+Keys [1]: [timestamp_hour#13L]
+Functions [5]: [first(CASE WHEN (row_asc#2692 = 1) THEN open#16 END, false), max(high#17), min(low#18), first(CASE WHEN (row_desc#2694 = 1) THEN close#19 END, false), sum(volume#20)]
+Aggregate Attributes [5]: [first(CASE WHEN (row_asc#2692 = 1) THEN open#16 END)()#2713, max(high#17)#2714, min(low#18)#2715, first(CASE WHEN (row_desc#2694 = 1) THEN close#19 END)()#2716, sum(volume#20)#2717]
+Results [6]: [timestamp_hour#13L, first(CASE WHEN (row_asc#2692 = 1) THEN open#16 END)()#2713 AS open#2696, max(high#17)#2714 AS high#2697, min(low#18)#2715 AS low#2698, first(CASE WHEN (row_desc#2694 = 1) THEN close#19 END)()#2716 AS close#2699, sum(volume#20)#2717 AS volume_exchange#2700]
+
+(60) AdaptiveSparkPlan
+Output [6]: [timestamp_hour#13L, open#2696, high#2697, low#2698, close#2699, volume_exchange#2700]
+Arguments: isFinalPlan=true
+
+(61) TableCacheQueryStage
+Output [6]: [timestamp_hour#13L, open#2696, high#2697, low#2698, close#2699, volume_exchange#2700]
+Arguments: 1
+
+(62) Filter
+Input [6]: [timestamp_hour#13L, open#2696, high#2697, low#2698, close#2699, volume_exchange#2700]
+Condition : isnotnull(timestamp_hour#13L)
+
+(63) BroadcastHashJoin [codegen id : 2]
+Left keys [1]: [timestamp_hour#4L]
+Right keys [1]: [timestamp_hour#13L]
+Join type: Inner
+Join condition: None
+
+(64) Project [codegen id : 2]
+Output [19]: [timestamp_hour#4L, tx_count#1481L, n_blocks#1482L, volume_sats#1483L, avg_tx_sats#1484, avg_block_size#1485, total_block_size#1486L, whale_tx_count#1487L, whale_volume_sats#1488L, coinbase_count#1489L, miner_issuance_sats#1490L, volume_btc#1512, whale_volume_btc#1513, miner_issuance_btc#1514, open#2696, high#2697, low#2698, close#2699, volume_exchange#2700]
+Input [20]: [timestamp_hour#4L, tx_count#1481L, n_blocks#1482L, volume_sats#1483L, avg_tx_sats#1484, avg_block_size#1485, total_block_size#1486L, whale_tx_count#1487L, whale_volume_sats#1488L, coinbase_count#1489L, miner_issuance_sats#1490L, volume_btc#1512, whale_volume_btc#1513, miner_issuance_btc#1514, timestamp_hour#13L, open#2696, high#2697, low#2698, close#2699, volume_exchange#2700]
+
+(65) ResultQueryStage
+Output [19]: [timestamp_hour#4L, tx_count#1481L, n_blocks#1482L, volume_sats#1483L, avg_tx_sats#1484, avg_block_size#1485, total_block_size#1486L, whale_tx_count#1487L, whale_volume_sats#1488L, coinbase_count#1489L, miner_issuance_sats#1490L, volume_btc#1512, whale_volume_btc#1513, miner_issuance_btc#1514, open#2696, high#2697, low#2698, close#2699, volume_exchange#2700]
+Arguments: 3
+
+(66) Filter
+Input [14]: [timestamp_hour#4L, tx_count#1481L, n_blocks#1482L, volume_sats#1483L, avg_tx_sats#1484, avg_block_size#1485, total_block_size#1486L, whale_tx_count#1487L, whale_volume_sats#1488L, coinbase_count#1489L, miner_issuance_sats#1490L, volume_btc#1512, whale_volume_btc#1513, miner_issuance_btc#1514]
+Condition : isnotnull(timestamp_hour#4L)
+
+(67) BroadcastExchange
+Input [14]: [timestamp_hour#4L, tx_count#1481L, n_blocks#1482L, volume_sats#1483L, avg_tx_sats#1484, avg_block_size#1485, total_block_size#1486L, whale_tx_count#1487L, whale_volume_sats#1488L, coinbase_count#1489L, miner_issuance_sats#1490L, volume_btc#1512, whale_volume_btc#1513, miner_issuance_btc#1514]
+Arguments: HashedRelationBroadcastMode(List(input[0, bigint, false]),false), [plan_id=616]
+
+(68) Filter
+Input [6]: [timestamp_hour#13L, open#2696, high#2697, low#2698, close#2699, volume_exchange#2700]
+Condition : isnotnull(timestamp_hour#13L)
+
+(69) BroadcastHashJoin
+Left keys [1]: [timestamp_hour#4L]
+Right keys [1]: [timestamp_hour#13L]
+Join type: Inner
+Join condition: None
+
+(70) Project
+Output [19]: [timestamp_hour#4L, tx_count#1481L, n_blocks#1482L, volume_sats#1483L, avg_tx_sats#1484, avg_block_size#1485, total_block_size#1486L, whale_tx_count#1487L, whale_volume_sats#1488L, coinbase_count#1489L, miner_issuance_sats#1490L, volume_btc#1512, whale_volume_btc#1513, miner_issuance_btc#1514, open#2696, high#2697, low#2698, close#2699, volume_exchange#2700]
+Input [20]: [timestamp_hour#4L, tx_count#1481L, n_blocks#1482L, volume_sats#1483L, avg_tx_sats#1484, avg_block_size#1485, total_block_size#1486L, whale_tx_count#1487L, whale_volume_sats#1488L, coinbase_count#1489L, miner_issuance_sats#1490L, volume_btc#1512, whale_volume_btc#1513, miner_issuance_btc#1514, timestamp_hour#13L, open#2696, high#2697, low#2698, close#2699, volume_exchange#2700]
+
+(71) AdaptiveSparkPlan
+Output [19]: [timestamp_hour#4L, tx_count#1481L, n_blocks#1482L, volume_sats#1483L, avg_tx_sats#1484, avg_block_size#1485, total_block_size#1486L, whale_tx_count#1487L, whale_volume_sats#1488L, coinbase_count#1489L, miner_issuance_sats#1490L, volume_btc#1512, whale_volume_btc#1513, miner_issuance_btc#1514, open#2696, high#2697, low#2698, close#2699, volume_exchange#2700]
+Arguments: isFinalPlan=true
+
+(72) TableCacheQueryStage
+Output [19]: [timestamp_hour#4L, tx_count#1481L, n_blocks#1482L, volume_sats#1483L, avg_tx_sats#1484, avg_block_size#1485, total_block_size#1486L, whale_tx_count#1487L, whale_volume_sats#1488L, coinbase_count#1489L, miner_issuance_sats#1490L, volume_btc#1512, whale_volume_btc#1513, miner_issuance_btc#1514, open#2696, high#2697, low#2698, close#2699, volume_exchange#2700]
+Arguments: 0
+
+(73) Exchange
+Input [19]: [timestamp_hour#4L, tx_count#1481L, n_blocks#1482L, volume_sats#1483L, avg_tx_sats#1484, avg_block_size#1485, total_block_size#1486L, whale_tx_count#1487L, whale_volume_sats#1488L, coinbase_count#1489L, miner_issuance_sats#1490L, volume_btc#1512, whale_volume_btc#1513, miner_issuance_btc#1514, open#2696, high#2697, low#2698, close#2699, volume_exchange#2700]
+Arguments: SinglePartition, ENSURE_REQUIREMENTS, [plan_id=814]
+
+(74) ShuffleQueryStage
+Output [19]: [timestamp_hour#4L, tx_count#1481L, n_blocks#1482L, volume_sats#1483L, avg_tx_sats#1484, avg_block_size#1485, total_block_size#1486L, whale_tx_count#1487L, whale_volume_sats#1488L, coinbase_count#1489L, miner_issuance_sats#1490L, volume_btc#1512, whale_volume_btc#1513, miner_issuance_btc#1514, open#2696, high#2697, low#2698, close#2699, volume_exchange#2700]
+Arguments: 1
+
+(75) Sort [codegen id : 1]
+Input [19]: [timestamp_hour#4L, tx_count#1481L, n_blocks#1482L, volume_sats#1483L, avg_tx_sats#1484, avg_block_size#1485, total_block_size#1486L, whale_tx_count#1487L, whale_volume_sats#1488L, coinbase_count#1489L, miner_issuance_sats#1490L, volume_btc#1512, whale_volume_btc#1513, miner_issuance_btc#1514, open#2696, high#2697, low#2698, close#2699, volume_exchange#2700]
+Arguments: [timestamp_hour#4L ASC NULLS FIRST], false, 0
+
+(76) Window
+Input [19]: [timestamp_hour#4L, tx_count#1481L, n_blocks#1482L, volume_sats#1483L, avg_tx_sats#1484, avg_block_size#1485, total_block_size#1486L, whale_tx_count#1487L, whale_volume_sats#1488L, coinbase_count#1489L, miner_issuance_sats#1490L, volume_btc#1512, whale_volume_btc#1513, miner_issuance_btc#1514, open#2696, high#2697, low#2698, close#2699, volume_exchange#2700]
+Arguments: [lag(close#2699, -1, null) windowspecdefinition(timestamp_hour#4L ASC NULLS FIRST, specifiedwindowframe(RowFrame, -1, -1)) AS close_lag1#4770, lag(close#2699, -24, null) windowspecdefinition(timestamp_hour#4L ASC NULLS FIRST, specifiedwindowframe(RowFrame, -24, -24)) AS close_lag24#4771], [timestamp_hour#4L ASC NULLS FIRST]
+
+(77) Project [codegen id : 2]
+Output [23]: [timestamp_hour#4L, tx_count#1481L, n_blocks#1482L, volume_sats#1483L, avg_tx_sats#1484, avg_block_size#1485, total_block_size#1486L, whale_tx_count#1487L, whale_volume_sats#1488L, coinbase_count#1489L, miner_issuance_sats#1490L, volume_btc#1512, whale_volume_btc#1513, miner_issuance_btc#1514, open#2696, high#2697, low#2698, close#2699, volume_exchange#2700, close_lag1#4770, close_lag24#4771, ((close#2699 - close_lag1#4770) / close_lag1#4770) AS return_1h#4772, ((close#2699 - close_lag24#4771) / close_lag24#4771) AS return_24h#4773]
+Input [21]: [timestamp_hour#4L, tx_count#1481L, n_blocks#1482L, volume_sats#1483L, avg_tx_sats#1484, avg_block_size#1485, total_block_size#1486L, whale_tx_count#1487L, whale_volume_sats#1488L, coinbase_count#1489L, miner_issuance_sats#1490L, volume_btc#1512, whale_volume_btc#1513, miner_issuance_btc#1514, open#2696, high#2697, low#2698, close#2699, volume_exchange#2700, close_lag1#4770, close_lag24#4771]
+
+(78) Window
+Input [23]: [timestamp_hour#4L, tx_count#1481L, n_blocks#1482L, volume_sats#1483L, avg_tx_sats#1484, avg_block_size#1485, total_block_size#1486L, whale_tx_count#1487L, whale_volume_sats#1488L, coinbase_count#1489L, miner_issuance_sats#1490L, volume_btc#1512, whale_volume_btc#1513, miner_issuance_btc#1514, open#2696, high#2697, low#2698, close#2699, volume_exchange#2700, close_lag1#4770, close_lag24#4771, return_1h#4772, return_24h#4773]
+Arguments: [stddev(return_1h#4772) windowspecdefinition(timestamp_hour#4L ASC NULLS FIRST, specifiedwindowframe(RowFrame, -23, currentrow$())) AS volatility_24h#4774, avg(tx_count#1481L) windowspecdefinition(timestamp_hour#4L ASC NULLS FIRST, specifiedwindowframe(RowFrame, -23, currentrow$())) AS tx_count_ma24#4786, avg(volume_btc#1512) windowspecdefinition(timestamp_hour#4L ASC NULLS FIRST, specifiedwindowframe(RowFrame, -23, currentrow$())) AS volume_btc_ma24#4788, avg(whale_tx_count#1487L) windowspecdefinition(timestamp_hour#4L ASC NULLS FIRST, specifiedwindowframe(RowFrame, -23, currentrow$())) AS whale_tx_ma24#4790, avg(miner_issuance_btc#1514) windowspecdefinition(timestamp_hour#4L ASC NULLS FIRST, specifiedwindowframe(RowFrame, -23, currentrow$())) AS miner_issuance_ma24#4792], [timestamp_hour#4L ASC NULLS FIRST]
+
+(79) Project [codegen id : 3]
+Output [31]: [timestamp_hour#4L, tx_count#1481L, n_blocks#1482L, volume_sats#1483L, avg_tx_sats#1484, avg_block_size#1485, total_block_size#1486L, whale_tx_count#1487L, whale_volume_sats#1488L, coinbase_count#1489L, miner_issuance_sats#1490L, volume_btc#1512, whale_volume_btc#1513, miner_issuance_btc#1514, open#2696, high#2697, low#2698, close#2699, volume_exchange#2700, close_lag1#4770, close_lag24#4771, return_1h#4772, return_24h#4773, volatility_24h#4774, (close#2699 / (volume_btc#1512 + 0.001)) AS nvt_like#4784, (volume_btc#1512 / (volume_exchange#2700 + 0.001)) AS onchain_vs_exchange#4785, tx_count_ma24#4786, volume_btc_ma24#4788, whale_tx_ma24#4790, miner_issuance_ma24#4792, cast(tx_count#1481L as double) AS _w0#4812]
+Input [28]: [timestamp_hour#4L, tx_count#1481L, n_blocks#1482L, volume_sats#1483L, avg_tx_sats#1484, avg_block_size#1485, total_block_size#1486L, whale_tx_count#1487L, whale_volume_sats#1488L, coinbase_count#1489L, miner_issuance_sats#1490L, volume_btc#1512, whale_volume_btc#1513, miner_issuance_btc#1514, open#2696, high#2697, low#2698, close#2699, volume_exchange#2700, close_lag1#4770, close_lag24#4771, return_1h#4772, return_24h#4773, volatility_24h#4774, tx_count_ma24#4786, volume_btc_ma24#4788, whale_tx_ma24#4790, miner_issuance_ma24#4792]
+
+(80) Window
+Input [31]: [timestamp_hour#4L, tx_count#1481L, n_blocks#1482L, volume_sats#1483L, avg_tx_sats#1484, avg_block_size#1485, total_block_size#1486L, whale_tx_count#1487L, whale_volume_sats#1488L, coinbase_count#1489L, miner_issuance_sats#1490L, volume_btc#1512, whale_volume_btc#1513, miner_issuance_btc#1514, open#2696, high#2697, low#2698, close#2699, volume_exchange#2700, close_lag1#4770, close_lag24#4771, return_1h#4772, return_24h#4773, volatility_24h#4774, nvt_like#4784, onchain_vs_exchange#4785, tx_count_ma24#4786, volume_btc_ma24#4788, whale_tx_ma24#4790, miner_issuance_ma24#4792, _w0#4812]
+Arguments: [stddev(_w0#4812) windowspecdefinition(timestamp_hour#4L ASC NULLS FIRST, specifiedwindowframe(RowFrame, -23, currentrow$())) AS tx_count_std24#4794], [timestamp_hour#4L ASC NULLS FIRST]
+
+(81) Project [codegen id : 4]
+Output [33]: [timestamp_hour#4L, tx_count#1481L, n_blocks#1482L, volume_sats#1483L, avg_tx_sats#1484, avg_block_size#1485, total_block_size#1486L, whale_tx_count#1487L, whale_volume_sats#1488L, coinbase_count#1489L, miner_issuance_sats#1490L, volume_btc#1512, whale_volume_btc#1513, miner_issuance_btc#1514, open#2696, high#2697, low#2698, close#2699, volume_exchange#2700, close_lag1#4770, close_lag24#4771, return_1h#4772, return_24h#4773, volatility_24h#4774, nvt_like#4784, onchain_vs_exchange#4785, tx_count_ma24#4786, volume_btc_ma24#4788, whale_tx_ma24#4790, miner_issuance_ma24#4792, tx_count_std24#4794, ((cast(tx_count#1481L as double) - tx_count_ma24#4786) / (tx_count_std24#4794 + 0.001)) AS tx_count_zscore#4821, cast(whale_tx_count#1487L as double) AS _w0#4840]
+Input [32]: [timestamp_hour#4L, tx_count#1481L, n_blocks#1482L, volume_sats#1483L, avg_tx_sats#1484, avg_block_size#1485, total_block_size#1486L, whale_tx_count#1487L, whale_volume_sats#1488L, coinbase_count#1489L, miner_issuance_sats#1490L, volume_btc#1512, whale_volume_btc#1513, miner_issuance_btc#1514, open#2696, high#2697, low#2698, close#2699, volume_exchange#2700, close_lag1#4770, close_lag24#4771, return_1h#4772, return_24h#4773, volatility_24h#4774, nvt_like#4784, onchain_vs_exchange#4785, tx_count_ma24#4786, volume_btc_ma24#4788, whale_tx_ma24#4790, miner_issuance_ma24#4792, _w0#4812, tx_count_std24#4794]
+
+(82) Window
+Input [33]: [timestamp_hour#4L, tx_count#1481L, n_blocks#1482L, volume_sats#1483L, avg_tx_sats#1484, avg_block_size#1485, total_block_size#1486L, whale_tx_count#1487L, whale_volume_sats#1488L, coinbase_count#1489L, miner_issuance_sats#1490L, volume_btc#1512, whale_volume_btc#1513, miner_issuance_btc#1514, open#2696, high#2697, low#2698, close#2699, volume_exchange#2700, close_lag1#4770, close_lag24#4771, return_1h#4772, return_24h#4773, volatility_24h#4774, nvt_like#4784, onchain_vs_exchange#4785, tx_count_ma24#4786, volume_btc_ma24#4788, whale_tx_ma24#4790, miner_issuance_ma24#4792, tx_count_std24#4794, tx_count_zscore#4821, _w0#4840]
+Arguments: [stddev(_w0#4840) windowspecdefinition(timestamp_hour#4L ASC NULLS FIRST, specifiedwindowframe(RowFrame, -23, currentrow$())) AS whale_std24#4822, stddev(miner_issuance_btc#1514) windowspecdefinition(timestamp_hour#4L ASC NULLS FIRST, specifiedwindowframe(RowFrame, -23, currentrow$())) AS issuance_std24#4850, lead(close#2699, 1, null) windowspecdefinition(timestamp_hour#4L ASC NULLS FIRST, specifiedwindowframe(RowFrame, 1, 1)) AS close_next#4863], [timestamp_hour#4L ASC NULLS FIRST]
+
+(83) Filter [codegen id : 5]
+Input [36]: [timestamp_hour#4L, tx_count#1481L, n_blocks#1482L, volume_sats#1483L, avg_tx_sats#1484, avg_block_size#1485, total_block_size#1486L, whale_tx_count#1487L, whale_volume_sats#1488L, coinbase_count#1489L, miner_issuance_sats#1490L, volume_btc#1512, whale_volume_btc#1513, miner_issuance_btc#1514, open#2696, high#2697, low#2698, close#2699, volume_exchange#2700, close_lag1#4770, close_lag24#4771, return_1h#4772, return_24h#4773, volatility_24h#4774, nvt_like#4784, onchain_vs_exchange#4785, tx_count_ma24#4786, volume_btc_ma24#4788, whale_tx_ma24#4790, miner_issuance_ma24#4792, tx_count_std24#4794, tx_count_zscore#4821, _w0#4840, whale_std24#4822, issuance_std24#4850, close_next#4863]
+Condition : (isnotnull(close_next#4863) AND (isnotnull(close_lag24#4771) AND isnotnull(volatility_24h#4774)))
+
+(84) Project [codegen id : 5]
+Output [40]: [timestamp_hour#4L, tx_count#1481L, n_blocks#1482L, volume_sats#1483L, avg_tx_sats#1484, avg_block_size#1485, total_block_size#1486L, whale_tx_count#1487L, whale_volume_sats#1488L, coinbase_count#1489L, miner_issuance_sats#1490L, volume_btc#1512, whale_volume_btc#1513, miner_issuance_btc#1514, open#2696, high#2697, low#2698, close#2699, volume_exchange#2700, close_lag1#4770, close_lag24#4771, return_1h#4772, return_24h#4773, volatility_24h#4774, nvt_like#4784, onchain_vs_exchange#4785, tx_count_ma24#4786, volume_btc_ma24#4788, whale_tx_ma24#4790, miner_issuance_ma24#4792, tx_count_std24#4794, tx_count_zscore#4821, whale_std24#4822, ((cast(whale_tx_count#1487L as double) - whale_tx_ma24#4790) / (whale_std24#4822 + 0.001)) AS whale_zscore#4849, issuance_std24#4850, ((miner_issuance_btc#1514 - miner_issuance_ma24#4792) / (issuance_std24#4850 + 0.001)) AS issuance_zscore#4860, hour(cast(from_unixtime(timestamp_hour#4L, yyyy-MM-dd HH:mm:ss, Some(UTC)) as timestamp), Some(UTC)) AS hour_of_day#4861, dayofweek(cast(from_unixtime(timestamp_hour#4L, yyyy-MM-dd HH:mm:ss, Some(UTC)) as date)) AS day_of_week#4862, close_next#4863, CASE WHEN (close_next#4863 > close#2699) THEN 1 ELSE 0 END AS label#4864]
+Input [36]: [timestamp_hour#4L, tx_count#1481L, n_blocks#1482L, volume_sats#1483L, avg_tx_sats#1484, avg_block_size#1485, total_block_size#1486L, whale_tx_count#1487L, whale_volume_sats#1488L, coinbase_count#1489L, miner_issuance_sats#1490L, volume_btc#1512, whale_volume_btc#1513, miner_issuance_btc#1514, open#2696, high#2697, low#2698, close#2699, volume_exchange#2700, close_lag1#4770, close_lag24#4771, return_1h#4772, return_24h#4773, volatility_24h#4774, nvt_like#4784, onchain_vs_exchange#4785, tx_count_ma24#4786, volume_btc_ma24#4788, whale_tx_ma24#4790, miner_issuance_ma24#4792, tx_count_std24#4794, tx_count_zscore#4821, _w0#4840, whale_std24#4822, issuance_std24#4850, close_next#4863]
+
+(85) ResultQueryStage
+Output [40]: [timestamp_hour#4L, tx_count#1481L, n_blocks#1482L, volume_sats#1483L, avg_tx_sats#1484, avg_block_size#1485, total_block_size#1486L, whale_tx_count#1487L, whale_volume_sats#1488L, coinbase_count#1489L, miner_issuance_sats#1490L, volume_btc#1512, whale_volume_btc#1513, miner_issuance_btc#1514, open#2696, high#2697, low#2698, close#2699, volume_exchange#2700, close_lag1#4770, close_lag24#4771, return_1h#4772, return_24h#4773, volatility_24h#4774, nvt_like#4784, onchain_vs_exchange#4785, tx_count_ma24#4786, volume_btc_ma24#4788, whale_tx_ma24#4790, miner_issuance_ma24#4792, tx_count_std24#4794, tx_count_zscore#4821, whale_std24#4822, whale_zscore#4849, issuance_std24#4850, issuance_zscore#4860, hour_of_day#4861, day_of_week#4862, close_next#4863, label#4864]
+Arguments: 2
+
+(86) Exchange
+Input [19]: [timestamp_hour#4L, tx_count#1481L, n_blocks#1482L, volume_sats#1483L, avg_tx_sats#1484, avg_block_size#1485, total_block_size#1486L, whale_tx_count#1487L, whale_volume_sats#1488L, coinbase_count#1489L, miner_issuance_sats#1490L, volume_btc#1512, whale_volume_btc#1513, miner_issuance_btc#1514, open#2696, high#2697, low#2698, close#2699, volume_exchange#2700]
+Arguments: SinglePartition, ENSURE_REQUIREMENTS, [plan_id=779]
+
+(87) Sort
+Input [19]: [timestamp_hour#4L, tx_count#1481L, n_blocks#1482L, volume_sats#1483L, avg_tx_sats#1484, avg_block_size#1485, total_block_size#1486L, whale_tx_count#1487L, whale_volume_sats#1488L, coinbase_count#1489L, miner_issuance_sats#1490L, volume_btc#1512, whale_volume_btc#1513, miner_issuance_btc#1514, open#2696, high#2697, low#2698, close#2699, volume_exchange#2700]
+Arguments: [timestamp_hour#4L ASC NULLS FIRST], false, 0
+
+(88) Window
+Input [19]: [timestamp_hour#4L, tx_count#1481L, n_blocks#1482L, volume_sats#1483L, avg_tx_sats#1484, avg_block_size#1485, total_block_size#1486L, whale_tx_count#1487L, whale_volume_sats#1488L, coinbase_count#1489L, miner_issuance_sats#1490L, volume_btc#1512, whale_volume_btc#1513, miner_issuance_btc#1514, open#2696, high#2697, low#2698, close#2699, volume_exchange#2700]
+Arguments: [lag(close#2699, -1, null) windowspecdefinition(timestamp_hour#4L ASC NULLS FIRST, specifiedwindowframe(RowFrame, -1, -1)) AS close_lag1#4770, lag(close#2699, -24, null) windowspecdefinition(timestamp_hour#4L ASC NULLS FIRST, specifiedwindowframe(RowFrame, -24, -24)) AS close_lag24#4771], [timestamp_hour#4L ASC NULLS FIRST]
+
+(89) Project
+Output [23]: [timestamp_hour#4L, tx_count#1481L, n_blocks#1482L, volume_sats#1483L, avg_tx_sats#1484, avg_block_size#1485, total_block_size#1486L, whale_tx_count#1487L, whale_volume_sats#1488L, coinbase_count#1489L, miner_issuance_sats#1490L, volume_btc#1512, whale_volume_btc#1513, miner_issuance_btc#1514, open#2696, high#2697, low#2698, close#2699, volume_exchange#2700, close_lag1#4770, close_lag24#4771, ((close#2699 - close_lag1#4770) / close_lag1#4770) AS return_1h#4772, ((close#2699 - close_lag24#4771) / close_lag24#4771) AS return_24h#4773]
+Input [21]: [timestamp_hour#4L, tx_count#1481L, n_blocks#1482L, volume_sats#1483L, avg_tx_sats#1484, avg_block_size#1485, total_block_size#1486L, whale_tx_count#1487L, whale_volume_sats#1488L, coinbase_count#1489L, miner_issuance_sats#1490L, volume_btc#1512, whale_volume_btc#1513, miner_issuance_btc#1514, open#2696, high#2697, low#2698, close#2699, volume_exchange#2700, close_lag1#4770, close_lag24#4771]
+
+(90) Window
+Input [23]: [timestamp_hour#4L, tx_count#1481L, n_blocks#1482L, volume_sats#1483L, avg_tx_sats#1484, avg_block_size#1485, total_block_size#1486L, whale_tx_count#1487L, whale_volume_sats#1488L, coinbase_count#1489L, miner_issuance_sats#1490L, volume_btc#1512, whale_volume_btc#1513, miner_issuance_btc#1514, open#2696, high#2697, low#2698, close#2699, volume_exchange#2700, close_lag1#4770, close_lag24#4771, return_1h#4772, return_24h#4773]
+Arguments: [stddev(return_1h#4772) windowspecdefinition(timestamp_hour#4L ASC NULLS FIRST, specifiedwindowframe(RowFrame, -23, currentrow$())) AS volatility_24h#4774, avg(tx_count#1481L) windowspecdefinition(timestamp_hour#4L ASC NULLS FIRST, specifiedwindowframe(RowFrame, -23, currentrow$())) AS tx_count_ma24#4786, avg(volume_btc#1512) windowspecdefinition(timestamp_hour#4L ASC NULLS FIRST, specifiedwindowframe(RowFrame, -23, currentrow$())) AS volume_btc_ma24#4788, avg(whale_tx_count#1487L) windowspecdefinition(timestamp_hour#4L ASC NULLS FIRST, specifiedwindowframe(RowFrame, -23, currentrow$())) AS whale_tx_ma24#4790, avg(miner_issuance_btc#1514) windowspecdefinition(timestamp_hour#4L ASC NULLS FIRST, specifiedwindowframe(RowFrame, -23, currentrow$())) AS miner_issuance_ma24#4792], [timestamp_hour#4L ASC NULLS FIRST]
+
+(91) Project
+Output [31]: [timestamp_hour#4L, tx_count#1481L, n_blocks#1482L, volume_sats#1483L, avg_tx_sats#1484, avg_block_size#1485, total_block_size#1486L, whale_tx_count#1487L, whale_volume_sats#1488L, coinbase_count#1489L, miner_issuance_sats#1490L, volume_btc#1512, whale_volume_btc#1513, miner_issuance_btc#1514, open#2696, high#2697, low#2698, close#2699, volume_exchange#2700, close_lag1#4770, close_lag24#4771, return_1h#4772, return_24h#4773, volatility_24h#4774, (close#2699 / (volume_btc#1512 + 0.001)) AS nvt_like#4784, (volume_btc#1512 / (volume_exchange#2700 + 0.001)) AS onchain_vs_exchange#4785, tx_count_ma24#4786, volume_btc_ma24#4788, whale_tx_ma24#4790, miner_issuance_ma24#4792, cast(tx_count#1481L as double) AS _w0#4812]
+Input [28]: [timestamp_hour#4L, tx_count#1481L, n_blocks#1482L, volume_sats#1483L, avg_tx_sats#1484, avg_block_size#1485, total_block_size#1486L, whale_tx_count#1487L, whale_volume_sats#1488L, coinbase_count#1489L, miner_issuance_sats#1490L, volume_btc#1512, whale_volume_btc#1513, miner_issuance_btc#1514, open#2696, high#2697, low#2698, close#2699, volume_exchange#2700, close_lag1#4770, close_lag24#4771, return_1h#4772, return_24h#4773, volatility_24h#4774, tx_count_ma24#4786, volume_btc_ma24#4788, whale_tx_ma24#4790, miner_issuance_ma24#4792]
+
+(92) Window
+Input [31]: [timestamp_hour#4L, tx_count#1481L, n_blocks#1482L, volume_sats#1483L, avg_tx_sats#1484, avg_block_size#1485, total_block_size#1486L, whale_tx_count#1487L, whale_volume_sats#1488L, coinbase_count#1489L, miner_issuance_sats#1490L, volume_btc#1512, whale_volume_btc#1513, miner_issuance_btc#1514, open#2696, high#2697, low#2698, close#2699, volume_exchange#2700, close_lag1#4770, close_lag24#4771, return_1h#4772, return_24h#4773, volatility_24h#4774, nvt_like#4784, onchain_vs_exchange#4785, tx_count_ma24#4786, volume_btc_ma24#4788, whale_tx_ma24#4790, miner_issuance_ma24#4792, _w0#4812]
+Arguments: [stddev(_w0#4812) windowspecdefinition(timestamp_hour#4L ASC NULLS FIRST, specifiedwindowframe(RowFrame, -23, currentrow$())) AS tx_count_std24#4794], [timestamp_hour#4L ASC NULLS FIRST]
+
+(93) Project
+Output [33]: [timestamp_hour#4L, tx_count#1481L, n_blocks#1482L, volume_sats#1483L, avg_tx_sats#1484, avg_block_size#1485, total_block_size#1486L, whale_tx_count#1487L, whale_volume_sats#1488L, coinbase_count#1489L, miner_issuance_sats#1490L, volume_btc#1512, whale_volume_btc#1513, miner_issuance_btc#1514, open#2696, high#2697, low#2698, close#2699, volume_exchange#2700, close_lag1#4770, close_lag24#4771, return_1h#4772, return_24h#4773, volatility_24h#4774, nvt_like#4784, onchain_vs_exchange#4785, tx_count_ma24#4786, volume_btc_ma24#4788, whale_tx_ma24#4790, miner_issuance_ma24#4792, tx_count_std24#4794, ((cast(tx_count#1481L as double) - tx_count_ma24#4786) / (tx_count_std24#4794 + 0.001)) AS tx_count_zscore#4821, cast(whale_tx_count#1487L as double) AS _w0#4840]
+Input [32]: [timestamp_hour#4L, tx_count#1481L, n_blocks#1482L, volume_sats#1483L, avg_tx_sats#1484, avg_block_size#1485, total_block_size#1486L, whale_tx_count#1487L, whale_volume_sats#1488L, coinbase_count#1489L, miner_issuance_sats#1490L, volume_btc#1512, whale_volume_btc#1513, miner_issuance_btc#1514, open#2696, high#2697, low#2698, close#2699, volume_exchange#2700, close_lag1#4770, close_lag24#4771, return_1h#4772, return_24h#4773, volatility_24h#4774, nvt_like#4784, onchain_vs_exchange#4785, tx_count_ma24#4786, volume_btc_ma24#4788, whale_tx_ma24#4790, miner_issuance_ma24#4792, _w0#4812, tx_count_std24#4794]
+
+(94) Window
+Input [33]: [timestamp_hour#4L, tx_count#1481L, n_blocks#1482L, volume_sats#1483L, avg_tx_sats#1484, avg_block_size#1485, total_block_size#1486L, whale_tx_count#1487L, whale_volume_sats#1488L, coinbase_count#1489L, miner_issuance_sats#1490L, volume_btc#1512, whale_volume_btc#1513, miner_issuance_btc#1514, open#2696, high#2697, low#2698, close#2699, volume_exchange#2700, close_lag1#4770, close_lag24#4771, return_1h#4772, return_24h#4773, volatility_24h#4774, nvt_like#4784, onchain_vs_exchange#4785, tx_count_ma24#4786, volume_btc_ma24#4788, whale_tx_ma24#4790, miner_issuance_ma24#4792, tx_count_std24#4794, tx_count_zscore#4821, _w0#4840]
+Arguments: [stddev(_w0#4840) windowspecdefinition(timestamp_hour#4L ASC NULLS FIRST, specifiedwindowframe(RowFrame, -23, currentrow$())) AS whale_std24#4822, stddev(miner_issuance_btc#1514) windowspecdefinition(timestamp_hour#4L ASC NULLS FIRST, specifiedwindowframe(RowFrame, -23, currentrow$())) AS issuance_std24#4850, lead(close#2699, 1, null) windowspecdefinition(timestamp_hour#4L ASC NULLS FIRST, specifiedwindowframe(RowFrame, 1, 1)) AS close_next#4863], [timestamp_hour#4L ASC NULLS FIRST]
+
+(95) Filter
+Input [36]: [timestamp_hour#4L, tx_count#1481L, n_blocks#1482L, volume_sats#1483L, avg_tx_sats#1484, avg_block_size#1485, total_block_size#1486L, whale_tx_count#1487L, whale_volume_sats#1488L, coinbase_count#1489L, miner_issuance_sats#1490L, volume_btc#1512, whale_volume_btc#1513, miner_issuance_btc#1514, open#2696, high#2697, low#2698, close#2699, volume_exchange#2700, close_lag1#4770, close_lag24#4771, return_1h#4772, return_24h#4773, volatility_24h#4774, nvt_like#4784, onchain_vs_exchange#4785, tx_count_ma24#4786, volume_btc_ma24#4788, whale_tx_ma24#4790, miner_issuance_ma24#4792, tx_count_std24#4794, tx_count_zscore#4821, _w0#4840, whale_std24#4822, issuance_std24#4850, close_next#4863]
+Condition : (isnotnull(close_next#4863) AND (isnotnull(close_lag24#4771) AND isnotnull(volatility_24h#4774)))
+
+(96) Project
+Output [40]: [timestamp_hour#4L, tx_count#1481L, n_blocks#1482L, volume_sats#1483L, avg_tx_sats#1484, avg_block_size#1485, total_block_size#1486L, whale_tx_count#1487L, whale_volume_sats#1488L, coinbase_count#1489L, miner_issuance_sats#1490L, volume_btc#1512, whale_volume_btc#1513, miner_issuance_btc#1514, open#2696, high#2697, low#2698, close#2699, volume_exchange#2700, close_lag1#4770, close_lag24#4771, return_1h#4772, return_24h#4773, volatility_24h#4774, nvt_like#4784, onchain_vs_exchange#4785, tx_count_ma24#4786, volume_btc_ma24#4788, whale_tx_ma24#4790, miner_issuance_ma24#4792, tx_count_std24#4794, tx_count_zscore#4821, whale_std24#4822, ((cast(whale_tx_count#1487L as double) - whale_tx_ma24#4790) / (whale_std24#4822 + 0.001)) AS whale_zscore#4849, issuance_std24#4850, ((miner_issuance_btc#1514 - miner_issuance_ma24#4792) / (issuance_std24#4850 + 0.001)) AS issuance_zscore#4860, hour(cast(from_unixtime(timestamp_hour#4L, yyyy-MM-dd HH:mm:ss, Some(UTC)) as timestamp), Some(UTC)) AS hour_of_day#4861, dayofweek(cast(from_unixtime(timestamp_hour#4L, yyyy-MM-dd HH:mm:ss, Some(UTC)) as date)) AS day_of_week#4862, close_next#4863, CASE WHEN (close_next#4863 > close#2699) THEN 1 ELSE 0 END AS label#4864]
+Input [36]: [timestamp_hour#4L, tx_count#1481L, n_blocks#1482L, volume_sats#1483L, avg_tx_sats#1484, avg_block_size#1485, total_block_size#1486L, whale_tx_count#1487L, whale_volume_sats#1488L, coinbase_count#1489L, miner_issuance_sats#1490L, volume_btc#1512, whale_volume_btc#1513, miner_issuance_btc#1514, open#2696, high#2697, low#2698, close#2699, volume_exchange#2700, close_lag1#4770, close_lag24#4771, return_1h#4772, return_24h#4773, volatility_24h#4774, nvt_like#4784, onchain_vs_exchange#4785, tx_count_ma24#4786, volume_btc_ma24#4788, whale_tx_ma24#4790, miner_issuance_ma24#4792, tx_count_std24#4794, tx_count_zscore#4821, _w0#4840, whale_std24#4822, issuance_std24#4850, close_next#4863]
+
+(97) AdaptiveSparkPlan
+Output [40]: [timestamp_hour#4L, tx_count#1481L, n_blocks#1482L, volume_sats#1483L, avg_tx_sats#1484, avg_block_size#1485, total_block_size#1486L, whale_tx_count#1487L, whale_volume_sats#1488L, coinbase_count#1489L, miner_issuance_sats#1490L, volume_btc#1512, whale_volume_btc#1513, miner_issuance_btc#1514, open#2696, high#2697, low#2698, close#2699, volume_exchange#2700, close_lag1#4770, close_lag24#4771, return_1h#4772, return_24h#4773, volatility_24h#4774, nvt_like#4784, onchain_vs_exchange#4785, tx_count_ma24#4786, volume_btc_ma24#4788, whale_tx_ma24#4790, miner_issuance_ma24#4792, tx_count_std24#4794, tx_count_zscore#4821, whale_std24#4822, whale_zscore#4849, issuance_std24#4850, issuance_zscore#4860, hour_of_day#4861, day_of_week#4862, close_next#4863, label#4864]
+Arguments: isFinalPlan=true
+
+(98) AdaptiveSparkPlan
+Output [40]: [timestamp_hour#4L, tx_count#1481L, n_blocks#1482L, volume_sats#1483L, avg_tx_sats#1484, avg_block_size#1485, total_block_size#1486L, whale_tx_count#1487L, whale_volume_sats#1488L, coinbase_count#1489L, miner_issuance_sats#1490L, volume_btc#1512, whale_volume_btc#1513, miner_issuance_btc#1514, open#2696, high#2697, low#2698, close#2699, volume_exchange#2700, close_lag1#4770, close_lag24#4771, return_1h#4772, return_24h#4773, volatility_24h#4774, nvt_like#4784, onchain_vs_exchange#4785, tx_count_ma24#4786, volume_btc_ma24#4788, whale_tx_ma24#4790, miner_issuance_ma24#4792, tx_count_std24#4794, tx_count_zscore#4821, whale_std24#4822, whale_zscore#4849, issuance_std24#4850, issuance_zscore#4860, hour_of_day#4861, day_of_week#4862, close_next#4863, label#4864]
+Arguments: isFinalPlan=false
+
+

@@ -1,0 +1,3 @@
+run_id,task,note,files_read,input_size_bytes,shuffle_read_bytes,shuffle_write_bytes
+1,PMI_Pairs,baseline,0,Cached,570.8 KiB,570.8 KiB
+1,PMI_Stripes,Stripes method,0,Cached,887.2 KiB,887.2 KiB

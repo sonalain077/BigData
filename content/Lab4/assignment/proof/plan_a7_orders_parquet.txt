@@ -1,0 +1,16 @@
+=== A7 Orders Parquet Load Plan ===
+
+== Physical Plan ==
+* ColumnarToRow (2)
++- Scan parquet  (1)
+
+
+(1) Scan parquet 
+Output [9]: [o_orderkey#158, o_custkey#159, o_orderstatus#160, o_totalprice#161, o_orderdate#162, o_orderpriority#163, o_clerk#164, o_shippriority#165, o_comment#166]
+Batched: true
+Location: InMemoryFileIndex [file:/mnt/c/Users/phams/Desktop/E5/BigData/Lab4/assignment/data/tpch/TPC-H-0.1-PARQUET/orders]
+ReadSchema: struct<o_orderkey:int,o_custkey:int,o_orderstatus:string,o_totalprice:double,o_orderdate:string,o_orderpriority:string,o_clerk:string,o_shippriority:int,o_comment:string>
+
+(2) ColumnarToRow [codegen id : 1]
+Input [9]: [o_orderkey#158, o_custkey#159, o_orderstatus#160, o_totalprice#161, o_orderdate#162, o_orderpriority#163, o_clerk#164, o_shippriority#165, o_comment#166]
+

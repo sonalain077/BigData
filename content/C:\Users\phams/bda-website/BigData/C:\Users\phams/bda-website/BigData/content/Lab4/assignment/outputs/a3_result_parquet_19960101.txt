@@ -1,0 +1,28 @@
+Task: A3 - Part & Supplier Names (Broadcast Hash Join)
+Date: 1996-01-01
+Format: Parquet
+Duration: 29.46s
+Total Results: 266
+
+First 20 (l_orderkey, p_name, s_name):
+
+2309,burnished orchid rose rosy tomato,Supplier#000000519
+2595,purple floral green slate smoke,Supplier#000000675
+4773,turquoise yellow wheat salmon dim,Supplier#000000315
+9381,turquoise blush indian moccasin burlywood,Supplier#000000020
+17189,lavender green chocolate pink peach,Supplier#000000561
+17600,chartreuse snow saddle ghost medium,Supplier#000000968
+18372,navy black coral rose papaya,Supplier#000000641
+19462,royal steel lime purple light,Supplier#000000679
+22149,sienna snow frosted cornflower blush,Supplier#000000655
+22210,bisque tan coral blue salmon,Supplier#000000740
+22982,blanched ghost burlywood rose white,Supplier#000000377
+26176,medium royal puff sky saddle,Supplier#000000182
+26308,midnight ivory gainsboro slate khaki,Supplier#000000905
+26311,frosted orange seashell lemon chartreuse,Supplier#000000437
+27271,bisque steel azure blush linen,Supplier#000000861
+29383,goldenrod saddle plum chiffon lawn,Supplier#000000409
+32069,cornsilk medium midnight coral mint,Supplier#000000867
+32069,coral rose puff chiffon green,Supplier#000000991
+33734,powder smoke aquamarine midnight grey,Supplier#000000166
+37703,chartreuse plum orchid violet lavender,Supplier#000000187

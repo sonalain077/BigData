@@ -1,0 +1,5 @@
+Task: B1 - Hourly Trip Count
+Dataset: NYC Yellow Cab 2015 (20 columns)
+Windows: 0 | Trips: 0 | Duration: 59.22s
+
+window_start,window_end,trip_count

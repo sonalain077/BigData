@@ -1,0 +1,84 @@
+=== B1 Hourly Trip Count Stream Plan ===
+
+Dataset: NYC Yellow Cab 2015 (20 columns)
+Schema: vendor_id, pickup_datetime, ..., congestion_surcharge
+Timestamp column: pickup_datetime (position 1)
+Window: 1 hour tumbling
+Watermark: 10 minutes
+Output Mode: append
+
+== Physical Plan ==
+* HashAggregate (12)
++- StateStoreSave (11)
+   +- * HashAggregate (10)
+      +- StateStoreRestore (9)
+         +- * HashAggregate (8)
+            +- Exchange (7)
+               +- * HashAggregate (6)
+                  +- * Project (5)
+                     +- EventTimeWatermark (4)
+                        +- * Project (3)
+                           +- * Filter (2)
+                              +- StreamingRelation (1)
+
+
+(1) StreamingRelation
+Output [20]: [vendor_id#539, pickup_datetime#540, dropoff_datetime#541, passenger_count#542, trip_distance#543, pickup_longitude#544, pickup_latitude#545, rate_code#546, store_and_fwd_flag#547, dropoff_longitude#548, dropoff_latitude#549, payment_type#550, fare_amount#551, surcharge#552, mta_tax#553, tip_amount#554, tolls_amount#555, total_amount#556, improvement_surcharge#557, congestion_surcharge#558]
+Arguments: FileSource[data/taxi-data], [vendor_id#539, pickup_datetime#540, dropoff_datetime#541, passenger_count#542, trip_distance#543, pickup_longitude#544, pickup_latitude#545, rate_code#546, store_and_fwd_flag#547, dropoff_longitude#548, dropoff_latitude#549, payment_type#550, fare_amount#551, surcharge#552, mta_tax#553, tip_amount#554, tolls_amount#555, total_amount#556, improvement_surcharge#557, congestion_surcharge#558]
+
+(2) Filter [codegen id : 1]
+Input [20]: [vendor_id#539, pickup_datetime#540, dropoff_datetime#541, passenger_count#542, trip_distance#543, pickup_longitude#544, pickup_latitude#545, rate_code#546, store_and_fwd_flag#547, dropoff_longitude#548, dropoff_latitude#549, payment_type#550, fare_amount#551, surcharge#552, mta_tax#553, tip_amount#554, tolls_amount#555, total_amount#556, improvement_surcharge#557, congestion_surcharge#558]
+Condition : isnotnull(gettimestamp(pickup_datetime#540, yyyy-MM-dd HH:mm:ss, TimestampType, try_to_timestamp, Some(UTC), false))
+
+(3) Project [codegen id : 1]
+Output [1]: [gettimestamp(pickup_datetime#540, yyyy-MM-dd HH:mm:ss, TimestampType, try_to_timestamp, Some(UTC), false) AS pickup_ts#560]
+Input [20]: [vendor_id#539, pickup_datetime#540, dropoff_datetime#541, passenger_count#542, trip_distance#543, pickup_longitude#544, pickup_latitude#545, rate_code#546, store_and_fwd_flag#547, dropoff_longitude#548, dropoff_latitude#549, payment_type#550, fare_amount#551, surcharge#552, mta_tax#553, tip_amount#554, tolls_amount#555, total_amount#556, improvement_surcharge#557, congestion_surcharge#558]
+
+(4) EventTimeWatermark
+Input [1]: [pickup_ts#560]
+Arguments: 2079db04-22a4-4bb3-83eb-365fa2cbb088, pickup_ts#560: timestamp, 10 minutes
+
+(5) Project [codegen id : 2]
+Output [1]: [named_struct(start, knownnullable(precisetimestampconversion(((precisetimestampconversion(pickup_ts#560-T600000ms, TimestampType, LongType) - CASE WHEN (((precisetimestampconversion(pickup_ts#560-T600000ms, TimestampType, LongType) - 0) % 3600000000) < 0) THEN (((precisetimestampconversion(pickup_ts#560-T600000ms, TimestampType, LongType) - 0) % 3600000000) + 3600000000) ELSE ((precisetimestampconversion(pickup_ts#560-T600000ms, TimestampType, LongType) - 0) % 3600000000) END) - 0), LongType, TimestampType)), end, knownnullable(precisetimestampconversion((((precisetimestampconversion(pickup_ts#560-T600000ms, TimestampType, LongType) - CASE WHEN (((precisetimestampconversion(pickup_ts#560-T600000ms, TimestampType, LongType) - 0) % 3600000000) < 0) THEN (((precisetimestampconversion(pickup_ts#560-T600000ms, TimestampType, LongType) - 0) % 3600000000) + 3600000000) ELSE ((precisetimestampconversion(pickup_ts#560-T600000ms, TimestampType, LongType) - 0) % 3600000000) END) - 0) + 3600000000), LongType, TimestampType))) AS window#584-T600000ms]
+Input [1]: [pickup_ts#560-T600000ms]
+
+(6) HashAggregate [codegen id : 2]
+Input [1]: [window#584-T600000ms]
+Keys [1]: [window#584-T600000ms]
+Functions [1]: [partial_count(1)]
+Aggregate Attributes [1]: [count(1)#583L]
+Results [2]: [window#584-T600000ms, count#592L]
+
+(7) Exchange
+Input [2]: [window#584-T600000ms, count#592L]
+Arguments: hashpartitioning(window#584-T600000ms, 8), REQUIRED_BY_STATEFUL_OPERATOR, [plan_id=1361]
+
+(8) HashAggregate [codegen id : 3]
+Input [2]: [window#584-T600000ms, count#592L]
+Keys [1]: [window#584-T600000ms]
+Functions [1]: [merge_count(1)]
+Aggregate Attributes [1]: [count(1)#583L]
+Results [2]: [window#584-T600000ms, count#592L]
+
+(9) StateStoreRestore
+Input [2]: [window#584-T600000ms, count#592L]
+Arguments: [window#584-T600000ms], state info [ checkpoint = <unknown>, runId = 5f164ed4-b0a9-4e95-9415-d787db9d94c2, opId = 0, ver = 0, numPartitions = 8] stateStoreCkptIds = None, 2
+
+(10) HashAggregate [codegen id : 4]
+Input [2]: [window#584-T600000ms, count#592L]
+Keys [1]: [window#584-T600000ms]
+Functions [1]: [merge_count(1)]
+Aggregate Attributes [1]: [count(1)#583L]
+Results [2]: [window#584-T600000ms, count#592L]
+
+(11) StateStoreSave
+Input [2]: [window#584-T600000ms, count#592L]
+Arguments: [window#584-T600000ms], state info [ checkpoint = <unknown>, runId = 5f164ed4-b0a9-4e95-9415-d787db9d94c2, opId = 0, ver = 0, numPartitions = 8] stateStoreCkptIds = None, Append, -9223372036854775808, -9223372036854775808, 2
+
+(12) HashAggregate [codegen id : 5]
+Input [2]: [window#584-T600000ms, count#592L]
+Keys [1]: [window#584-T600000ms]
+Functions [1]: [count(1)]
+Aggregate Attributes [1]: [count(1)#583L]
+Results [3]: [window#584-T600000ms.start AS window_start#585, window#584-T600000ms.end AS window_end#586, count(1)#583L AS trip_count#561L]
+

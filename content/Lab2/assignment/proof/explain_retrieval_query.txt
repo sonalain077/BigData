@@ -1,0 +1,48 @@
+EXPLAIN FORMATTED — Boolean Query (Section 7, Query 2)
+================================================================================
+
+Query: AND query for terms: ['romeo', 'juliet']
+Type: AND (intersection)
+Expected: Partition pruning on 'term' column
+
+Physical Plan:
+--------------------------------------------------------------------------------
+== Physical Plan ==
+* Filter (5)
++- InMemoryTableScan (1)
+      +- InMemoryRelation (2)
+            +- * ColumnarToRow (4)
+               +- Scan parquet  (3)
+
+
+(1) InMemoryTableScan
+Output [4]: [term#2268, postings#2269, df#2270L, idf#2271]
+Arguments: [term#2268, postings#2269, df#2270L, idf#2271], [term#2268 IN (romeo,juliet)]
+
+(2) InMemoryRelation
+Arguments: [term#2268, postings#2269, df#2270L, idf#2271], StorageLevel(disk, memory, deserialized, 1 replicas)
+
+(3) Scan parquet 
+Output [4]: [term#1947, postings#1948, df#1949L, idf#1950]
+Batched: true
+Location: InMemoryFileIndex [file:/mnt/c/Users/phams/Desktop/E5/BigData/Lab2/assignment/outputs/index_parquet]
+ReadSchema: struct<term:string,postings:array<struct<doc_id:int,tf:bigint>>,df:bigint,idf:double>
+
+(4) ColumnarToRow [codegen id : 1]
+Input [4]: [term#1947, postings#1948, df#1949L, idf#1950]
+
+(5) Filter [codegen id : 1]
+Input [4]: [term#2268, postings#2269, df#2270L, idf#2271]
+Condition : term#2268 IN (romeo,juliet)
+
+
+
+================================================================================
+Interpretation:
+--------------------------------------------------------------------------------
+1. Filter: (term IN ('romeo', 'juliet'))
+2. PushedFilters: StringEquals predicates on 'term' column
+3. Partition Pruning: Spark skips Parquet row groups not matching
+4. Batched: true = vectorized reads (fast)
+5. Shuffle: NONE (read-only scan)
+================================================================================

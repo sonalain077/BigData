@@ -1,0 +1,16 @@
+=== A3 Supplier Parquet Load Plan (1996-01-01) ===
+
+== Physical Plan ==
+* ColumnarToRow (2)
++- Scan parquet  (1)
+
+
+(1) Scan parquet 
+Output [7]: [s_suppkey#29, s_name#30, s_address#31, s_nationkey#32, s_phone#33, s_acctbal#34, s_comment#35]
+Batched: true
+Location: InMemoryFileIndex [file:/mnt/c/Users/phams/Desktop/E5/BigData/Lab4/assignment/data/tpch/TPC-H-0.1-PARQUET/supplier]
+ReadSchema: struct<s_suppkey:int,s_name:string,s_address:string,s_nationkey:int,s_phone:string,s_acctbal:double,s_comment:string>
+
+(2) ColumnarToRow [codegen id : 1]
+Input [7]: [s_suppkey#29, s_name#30, s_address#31, s_nationkey#32, s_phone#33, s_acctbal#34, s_comment#35]
+

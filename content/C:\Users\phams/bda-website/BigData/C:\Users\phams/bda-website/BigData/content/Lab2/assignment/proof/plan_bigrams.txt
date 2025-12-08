@@ -1,0 +1,25 @@
+======================================================================
+EXPLAIN FORMATTED — Bigram Relative Frequency (Pairs)
+======================================================================
+
+Task: Compute f(w_i, w_{i+1}) / f(w_i, *)
+Approach: Pairs design with reduceByKey
+Dataset: shakespeare.txt (~5 MB)
+
+== Physical Plan ==
+* Scan ExistingRDD (1)
+
+
+(1) Scan ExistingRDD [codegen id : 1]
+Output [5]: [w_i#667, w_i_plus_1#668, count#669L, total#670L, relative_freq#671]
+Arguments: [w_i#667, w_i_plus_1#668, count#669L, total#670L, relative_freq#671], MapPartitionsRDD[251] at applySchemaToPythonRDD at NativeMethodAccessorImpl.java:0, ExistingRDD, UnknownPartitioning(0)
+
+
+
+======================================================================
+Notes:
+- Main computation done in RDD (reduceByKey for counting)
+- Broadcast used for marginals dictionary (efficiency)
+- This plan shows the DataFrame conversion stage only
+- Check Spark UI for complete shuffle metrics
+======================================================================

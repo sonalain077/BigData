@@ -1,0 +1,18 @@
+============================================================
+Spam Classification - Model Comparison
+============================================================
+
+Test dataset: data/spam/spam.test.qrels.txt.bz2
+
+Model                Accuracy        Status              
+-------------------------------------------------------
+group_x              21.4102% Success             
+group_y              74.5943% Success             
+britney              N/A             Missing             
+
+============================================================
+
+Known Issues:
+- britney model failed to train due to OOM (see Section 5)
+- group_x shows overfitting (21% accuracy)
+- Distributed mini-batch SGD for large datasets

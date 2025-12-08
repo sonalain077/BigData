@@ -1,0 +1,26 @@
+============================================================
+Ensemble Classifier - Performance Summary
+============================================================
+
+Models combined: 2
+  1. part-00000
+  2. part-00000
+
+Test dataset: data/spam/spam.test.qrels.txt.bz2
+
+Results:
+------------------------------------------------------------
+Method                         Accuracy       
+---------------------------------------------
+group_x (individual)           21.4100%
+group_y (individual)           74.5900%
+Ensemble (average)             22.9302%
+Ensemble (vote)                74.5943%
+
+============================================================
+
+Key Insights:
+- Average method: Combines continuous scores (smoother)
+- Vote method: Democratic voting (more robust to outliers)
+- Ensemble works best when models have diverse errors
+- With only 2 models (group_x weak), limited improvement expected

@@ -1,0 +1,40 @@
+== Physical Plan ==
+AdaptiveSparkPlan (6)
++- HashAggregate (5)
+   +- Exchange (4)
+      +- HashAggregate (3)
+         +- Project (2)
+            +- Range (1)
+
+
+(1) Range
+Output [1]: [id#35L]
+Arguments: Range (0, 10, step=1, splits=Some(8))
+
+(2) Project
+Output [1]: [(id#35L % 2) AS id_mod_2#36L]
+Input [1]: [id#35L]
+
+(3) HashAggregate
+Input [1]: [id_mod_2#36L]
+Keys [1]: [id_mod_2#36L]
+Functions [1]: [partial_count(1)]
+Aggregate Attributes [1]: [count#41L]
+Results [2]: [id_mod_2#36L, count#42L]
+
+(4) Exchange
+Input [2]: [id_mod_2#36L, count#42L]
+Arguments: hashpartitioning(id_mod_2#36L, 8), ENSURE_REQUIREMENTS, [plan_id=88]
+
+(5) HashAggregate
+Input [2]: [id_mod_2#36L, count#42L]
+Keys [1]: [id_mod_2#36L]
+Functions [1]: [count(1)]
+Aggregate Attributes [1]: [count(1)#40L]
+Results [2]: [id_mod_2#36L, count(1)#40L AS count#37L]
+
+(6) AdaptiveSparkPlan
+Output [2]: [id_mod_2#36L, count#37L]
+Arguments: isFinalPlan=false
+
+
