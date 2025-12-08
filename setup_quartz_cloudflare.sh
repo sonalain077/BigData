@@ -165,7 +165,7 @@ ensure_assets_emitter
 # ====== 5) SITE SKELETON ======
 log_step "5) Creating base content structure"
 # hard-clean stale output (remove all Labs/projects to force fresh sync)
-rm -rf "$SITE_DIR/public" "$SITE_DIR/quartz/static/nb" "$SITE_DIR/content/BDA" "$SITE_DIR/content/nb" "$SITE_DIR/content/Lab"* "$SITE_DIR/content/labs-final" "$SITE_DIR/content/project-final"
+rm -rf "$SITE_DIR/public" "$SITE_DIR/quartz/static/nb" "$SITE_DIR/content/BDA" "$SITE_DIR/content/nb" "$SITE_DIR/content/Lab"* "$SITE_DIR/content/labs-final" "$SITE_DIR/content/project-final" "$SITE_DIR/content/Project"
 mkdir -p "$SITE_DIR/content" "$NB_STATIC" "$SITE_DIR/quartz/static/img"
 # Copy images to quartz/static/img (Static plugin serves static/ at /static/)
 [ -d "$ROOT/static/img" ] && cp -a "$ROOT/static/img/." "$SITE_DIR/quartz/static/img/" || true
@@ -228,6 +228,7 @@ build_folder_downloads() {
   local roots=(
     "$SITE_DIR/content/labs-final"
     "$SITE_DIR/content/project-final"
+    "$SITE_DIR/content/Project"
     "$SITE_DIR/content/roadmap"
     "$SITE_DIR/content/support"
   )
@@ -443,7 +444,7 @@ NB_INDEX_MD="$SITE_DIR/content/resources.md"
   
   # List notebooks from labs-final and project-final if they exist
   find "$NB_WRAP_ROOT" -type f -name "*.md" \
-       \( -path "$NB_WRAP_ROOT/labs-final/*" -o -path "$NB_WRAP_ROOT/project-final/*" \) \
+       \( -path "$NB_WRAP_ROOT/labs-final/*" -o -path "$NB_WRAP_ROOT/project-final/*" -o -path "$NB_WRAP_ROOT/Project/*" \) \
        ! -name "index.md" -print0 |
   while IFS= read -r -d '' md; do
     rel="${md#"$NB_WRAP_ROOT/"}"; base="${rel%.md}"
@@ -453,7 +454,7 @@ NB_INDEX_MD="$SITE_DIR/content/resources.md"
 } > "$NB_INDEX_MD"
 
 # Create index page for each Lab directory with direct notebook links
-for labdir in "$NB_WRAP_ROOT"/Lab*; do
+for labdir in "$NB_WRAP_ROOT"/Lab* "$NB_WRAP_ROOT/Project"; do
   [[ -d "$labdir" ]] || continue
   labname=$(basename "$labdir")
   labindex="$labdir/index.md"
