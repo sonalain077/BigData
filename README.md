@@ -4,7 +4,7 @@
 
 ##  Contenu
 
-Ce site regroupe mes travaux pour le cours Big Data Analytics avec Apache Spark.
+Ce site regroupe les travaux pour le cours Big Data Analytics avec Apache Spark.
 
 ###  Labs 
 
@@ -34,9 +34,16 @@ Ce site regroupe mes travaux pour le cours Big Data Analytics avec Apache Spark.
 
 ###  Projet Final
 
-**Statut** : À venir
+**Bitcoin Price Prediction with Spark**
 
-Le projet final intégrera les techniques des 4 labs pour une analyse Big Data complète.
+Un projet complet de prédiction de la direction du prix du Bitcoin (hausse/baisse) combinant :
+- Données on-chain (blockchain Bitcoin - blocs et transactions)
+- Données de marché (prix OHLCV via Kaggle)
+- Pipeline ETL distribué avec Apache Spark
+- Feature engineering (métriques temporelles, ratios, lissages)
+- Machine Learning (Random Forest, Gradient Boosting)
+
+Le projet démontre la maîtrise des concepts des 4 labs : manipulation de données texte/binaires, graph analytics (réseau de transactions), analytics relationnel (jointures complexes) et traitement de séries temporelles.
 
 ##  Navigation
 
