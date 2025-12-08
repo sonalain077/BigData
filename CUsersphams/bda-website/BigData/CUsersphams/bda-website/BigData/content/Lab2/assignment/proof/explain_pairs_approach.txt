@@ -1,0 +1,21 @@
+================================================================================
+PAIRS APPROACH — EXPLAIN FORMATTED
+================================================================================
+
+Dataset: Shakespeare (122458 lines)
+Method: RDD.flatMap(extract_bigrams).reduceByKey(lambda x,y: x+y)
+Result: 286728 unique bigrams
+Duration: 2.797s
+
+Physical Plan:
+  Input: Text file (RDD parallelization)
+  Map: Extract bigrams (word1, word2) → emit ((word1, word2), 1)
+  Shuffle: Group by (word1, word2) key
+  Reduce: Sum counts per bigram
+  Output: (bigram, frequency) tuples
+
+Key Characteristics:
+  - Early aggregation via reduceByKey
+  - Combiner reduces data before shuffle
+  - Optimal for pairwise counting
+  - Shuffle key: (word1, word2)

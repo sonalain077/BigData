@@ -1,0 +1,4 @@
+v1
+{"path":"file:///home/img/BigData/Lab04/lab04-practice/data/taxi-data/part-2021-01-01-0000.csv","timestamp":1764979499102,"batchId":0}
+{"path":"file:///home/img/BigData/Lab04/lab04-practice/data/taxi-data/part-2021-01-01-0001.csv","timestamp":1764979499183,"batchId":0}
+{"path":"file:///home/img/BigData/Lab04/lab04-practice/data/taxi-data/part-2021-01-01-0002.csv","timestamp":1764979499255,"batchId":0}

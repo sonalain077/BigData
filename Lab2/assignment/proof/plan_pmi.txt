@@ -1,0 +1,17 @@
+PMI Analysis (Filtered)
+Threshold: 0.5
+Min Count: 10
+Total Bigrams: 774594
+Kept Bigrams: 5636
+
+Top Results:
+('milford', 'haven', 11, 15, 17, 4.523926633345178)
+('alexandria', "cleopatra's", 11, 21, 14, 4.462119483366977)
+('dramatis', 'personae', 36, 36, 36, 4.332771627853622)
+('willow', 'willow', 10, 18, 25, 4.2358616148455654)
+('hugh', 'evans', 14, 33, 20, 4.215658228757278)
+('don', 'pedro', 20, 45, 21, 4.214672315775627)
+('le', 'beau', 22, 57, 22, 4.133199272948417)
+('la', 'pucelle', 24, 70, 31, 3.9328256364839853)
+('thomas', 'lovell', 11, 62, 18, 3.882802619177574)
+('william', 'shakespeare', 38, 112, 38, 3.8398561059507275)

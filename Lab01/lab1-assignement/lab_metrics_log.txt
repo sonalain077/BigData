@@ -1,0 +1,4 @@
+run_id,task,note,files_read,input_size_bytes,shuffle_read_bytes,shuffle_write_bytes,timestamp
+r1,perfect_x,Query 3 - Perfect Follower,0,Cached,1431 B,1383 B,2025-12-06T14:41:03
+r1,PMI_Pairs,Query 5 - Pairs Method,0,Cached,2.6 MiB,2.6 MiB,2025-12-06T14:41:13
+r1,PMI_Stripes,Query 7 - Stripes Method,0,Cached,4.2 MiB,4.2 MiB,2025-12-06T14:41:23

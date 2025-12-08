@@ -1,0 +1,69 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+dist/
+build/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+.virtual_documents/
+
+# Spark
+metastore_db/
+derby.log
+spark-warehouse/
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Large Data Files - Lab3
+Lab3/assignment/data/spam/*.bz2
+Lab3/assignment/data/spam/*.txt.bz2
+Lab3/assignment/data/spam/*.gz
+
+# Large Data Files - General
+*.bz2
+*.gz
+*.tar.gz
+*.zip
+*.7z
+*.tar
+*.dat
+
+# Output directories (optionally keep structure, ignore large outputs)
+# Uncomment if output files are too large
+# Lab*/assignment/outputs/**/*.parquet
+# Lab*/assignment/outputs/**/*.csv
+
+# Lab4 Data Files - NYC Taxi + TPC-H (large datasets)
+Lab4/assignment/data/**/*.csv
+Lab4/assignment/data/**/*.txt
+Lab4/assignment/data/**/*.parquet
+Lab4/assignment/output/
+Lab4/assignment/checkpoint/
+
+# Temporary files
+*.tmp
+*.log
+*.out
+
+# --- MES REGLES PERSO ---
+*.tar
+*.dat
+*.zip
+*.gz
+*.tar.gz
+*.csv
+.ipynb_checkpoints/

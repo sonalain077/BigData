@@ -1,0 +1,100 @@
+======================================================================
+EXPLAIN FORMATTED — Inverted Index Build
+======================================================================
+
+== Physical Plan ==
+AdaptiveSparkPlan (15)
++- Project (14)
+   +- InMemoryTableScan (1)
+         +- InMemoryRelation (2)
+               +- AdaptiveSparkPlan (13)
+                  +- == Final Plan ==
+                     ResultQueryStage (9)
+                     +- ObjectHashAggregate (8)
+                        +- ShuffleQueryStage (7), Statistics(sizeInBytes=22.5 MiB, rowCount=2.60E+4)
+                           +- Exchange (6)
+                              +- ObjectHashAggregate (5)
+                                 +- * Project (4)
+                                    +- * Scan ExistingRDD (3)
+                  +- == Initial Plan ==
+                     ObjectHashAggregate (12)
+                     +- Exchange (11)
+                        +- ObjectHashAggregate (10)
+                           +- Project (4)
+                              +- Scan ExistingRDD (3)
+
+
+(1) InMemoryTableScan
+Output [3]: [df#1166L, postings#1165, term#1153]
+Arguments: [df#1166L, postings#1165, term#1153]
+
+(2) InMemoryRelation
+Arguments: [term#1153, postings#1165, df#1166L], StorageLevel(disk, memory, deserialized, 1 replicas)
+
+(3) Scan ExistingRDD [codegen id : 1]
+Output [2]: [(term, doc_id)#1151, tf#1152L]
+Arguments: [(term, doc_id)#1151, tf#1152L], MapPartitionsRDD[423] at applySchemaToPythonRDD at NativeMethodAccessorImpl.java:0, ExistingRDD, UnknownPartitioning(0)
+
+(4) Project [codegen id : 1]
+Output [3]: [tf#1152L, (term, doc_id)#1151._1 AS term#1153, cast((term, doc_id)#1151._2 as int) AS doc_id#1154]
+Input [2]: [(term, doc_id)#1151, tf#1152L]
+
+(5) ObjectHashAggregate
+Input [3]: [tf#1152L, term#1153, doc_id#1154]
+Keys [1]: [term#1153]
+Functions [2]: [partial_collect_list(struct(doc_id, doc_id#1154, tf, tf#1152L), 0, 0), partial_count(1)]
+Aggregate Attributes [2]: [buf#1172, count#1173L]
+Results [3]: [term#1153, buf#1174, count#1175L]
+
+(6) Exchange
+Input [3]: [term#1153, buf#1174, count#1175L]
+Arguments: hashpartitioning(term#1153, 8), ENSURE_REQUIREMENTS, [plan_id=1207]
+
+(7) ShuffleQueryStage
+Output [3]: [term#1153, buf#1174, count#1175L]
+Arguments: 0
+
+(8) ObjectHashAggregate
+Input [3]: [term#1153, buf#1174, count#1175L]
+Keys [1]: [term#1153]
+Functions [2]: [collect_list(struct(doc_id, doc_id#1154, tf, tf#1152L), 0, 0), count(1)]
+Aggregate Attributes [2]: [collect_list(struct(doc_id, doc_id#1154, tf, tf#1152L), 0, 0)#1171, count(1)#1170L]
+Results [3]: [term#1153, collect_list(struct(doc_id, doc_id#1154, tf, tf#1152L), 0, 0)#1171 AS postings#1165, count(1)#1170L AS df#1166L]
+
+(9) ResultQueryStage
+Output [3]: [term#1153, postings#1165, df#1166L]
+Arguments: 1
+
+(10) ObjectHashAggregate
+Input [3]: [tf#1152L, term#1153, doc_id#1154]
+Keys [1]: [term#1153]
+Functions [2]: [partial_collect_list(struct(doc_id, doc_id#1154, tf, tf#1152L), 0, 0), partial_count(1)]
+Aggregate Attributes [2]: [buf#1172, count#1173L]
+Results [3]: [term#1153, buf#1174, count#1175L]
+
+(11) Exchange
+Input [3]: [term#1153, buf#1174, count#1175L]
+Arguments: hashpartitioning(term#1153, 8), ENSURE_REQUIREMENTS, [plan_id=1183]
+
+(12) ObjectHashAggregate
+Input [3]: [term#1153, buf#1174, count#1175L]
+Keys [1]: [term#1153]
+Functions [2]: [collect_list(struct(doc_id, doc_id#1154, tf, tf#1152L), 0, 0), count(1)]
+Aggregate Attributes [2]: [collect_list(struct(doc_id, doc_id#1154, tf, tf#1152L), 0, 0)#1171, count(1)#1170L]
+Results [3]: [term#1153, collect_list(struct(doc_id, doc_id#1154, tf, tf#1152L), 0, 0)#1171 AS postings#1165, count(1)#1170L AS df#1166L]
+
+(13) AdaptiveSparkPlan
+Output [3]: [term#1153, postings#1165, df#1166L]
+Arguments: isFinalPlan=true
+
+(14) Project
+Output [4]: [term#1153, postings#1165, df#1166L, LOG10((12246.0 / cast(df#1166L as double))) AS idf#1641]
+Input [3]: [df#1166L, postings#1165, term#1153]
+
+(15) AdaptiveSparkPlan
+Output [4]: [term#1153, postings#1165, df#1166L, idf#1641]
+Arguments: isFinalPlan=false
+
+
+
+======================================================================

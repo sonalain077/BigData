@@ -1,0 +1,24 @@
+======================================================================
+Inverted Index Metadata
+======================================================================
+
+Dataset: shakespeare.txt
+Document Grouping: 10 lines per document
+Total Documents: 12,246
+Total Unique Terms: 25,975
+
+Statistics:
+  Avg df: 25.97
+  Max df: 10,632
+  Min df: 1
+
+Postings Format:
+  term (String): The indexed term
+  postings (Array[Struct]): [(doc_id, tf), ...]
+  df (Int): Document frequency
+  idf (Double): log10(num_docs / df)
+
+Storage:
+  Format: Parquet (columnar compression)
+  Location: /mnt/c/Users/phams/Desktop/E5/BigData/Lab2/assignment/outputs/index_parquet
+======================================================================

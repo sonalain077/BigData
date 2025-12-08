@@ -1,0 +1,34 @@
+# Model Training Summary
+# Date: 2025-12-07 17:34:23.091758
+# Run ID: model_train_20251207_173423
+
+## Dataset
+Total samples: 933
+Train samples: 748 (80.2%)
+Test samples: 185 (19.8%)
+Features: 18
+
+## Results
+Baseline Accuracy: 0.5243
+
+Random Forest:
+  Accuracy: 0.5730
+  F1-Score: 0.5730
+  AUC-ROC: 0.6105
+
+GBT:
+  Accuracy: 0.5459
+  F1-Score: 0.5458
+  AUC-ROC: 0.5975
+
+## Feature Importance (Top 10)
+1. return_1h: 0.0962
+2. tx_count_zscore: 0.0875
+3. volume_btc: 0.0869
+4. volume_exchange: 0.0852
+5. hour_of_day: 0.0840
+6. tx_count: 0.0796
+7. return_24h: 0.0774
+8. nvt_like: 0.0763
+9. avg_block_size: 0.0757
+10. onchain_vs_exchange: 0.0723

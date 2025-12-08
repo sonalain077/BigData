@@ -1,0 +1,33 @@
+# Market ETL Execution Plan
+# Date: 2025-12-07 17:32:06.854054
+
+== Physical Plan ==
+* Project (5)
++- * Project (4)
+   +- InMemoryTableScan (1) (columnarIn=false, columnarOut=true)
+         +- InMemoryRelation (2)
+               +- Scan csv  (3)
+
+
+(1) InMemoryTableScan
+Output [6]: [Close#4, High#2, Low#3, Open#1, Timestamp#0, Volume#5]
+Arguments: [Close#4, High#2, Low#3, Open#1, Timestamp#0, Volume#5]
+
+(2) InMemoryRelation
+Arguments: [Timestamp#0, Open#1, High#2, Low#3, Close#4, Volume#5], StorageLevel(disk, memory, deserialized, 1 replicas)
+
+(3) Scan csv 
+Output [6]: [Timestamp#0, Open#1, High#2, Low#3, Close#4, Volume#5]
+Batched: false
+Location: InMemoryFileIndex [file:/home/img/BigData/Project/data/prices/btcusd_1-min_data.csv]
+ReadSchema: struct<Timestamp:double,Open:double,High:double,Low:double,Close:double,Volume:double>
+
+(4) Project [codegen id : 1]
+Output [8]: [Timestamp#0, Open#1, High#2, Low#3, Close#4, Volume#5, cast(from_unixtime(cast(Timestamp#0 as bigint), yyyy-MM-dd HH:mm:ss, Some(UTC)) as timestamp) AS datetime#508, (FLOOR((Timestamp#0 / 3600.0)) * 3600) AS timestamp_hour#509L]
+Input [6]: [Close#4, High#2, Low#3, Open#1, Timestamp#0, Volume#5]
+
+(5) Project [codegen id : 1]
+Output [10]: [Timestamp#0, Open#1, High#2, Low#3, Close#4, Volume#5, datetime#508, timestamp_hour#509L, cast(datetime#508 as date) AS date#510, hour(datetime#508, Some(UTC)) AS hour#511]
+Input [8]: [Timestamp#0, Open#1, High#2, Low#3, Close#4, Volume#5, datetime#508, timestamp_hour#509L]
+
+

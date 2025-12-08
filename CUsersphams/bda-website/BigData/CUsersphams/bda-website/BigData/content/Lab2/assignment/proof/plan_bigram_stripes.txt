@@ -1,0 +1,27 @@
+======================================================================
+EXPLAIN FORMATTED — Bigram Relative Frequency (Stripes)
+======================================================================
+
+Design Pattern: Stripes
+
+Key differences vs Pairs:
+- Emits (w_i, {w_j: count}) instead of ((w_i, w_j), count)
+- Merges dictionaries with custom merge function
+- Reduces shuffle by ~50% (1 line per word instead of 1 per neighbor)
+
+== Physical Plan ==
+* Scan ExistingRDD (1)
+
+
+(1) Scan ExistingRDD [codegen id : 1]
+Output [5]: [w_i#458, w_i_plus_1#459, count#460L, total#461L, relative_freq#462]
+Arguments: [w_i#458, w_i_plus_1#459, count#460L, total#461L, relative_freq#462], MapPartitionsRDD[115] at applySchemaToPythonRDD at NativeMethodAccessorImpl.java:0, ExistingRDD, UnknownPartitioning(0)
+
+
+
+======================================================================
+Notes:
+- Main computation done in RDD with custom merge_stripes function
+- No broadcast needed (dictionaries already localized)
+- More compact than Pairs approach
+======================================================================

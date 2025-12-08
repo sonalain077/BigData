@@ -1,0 +1,20 @@
+project:
+  name: "Bitcoin Price Predictor"
+  authors: "Imad GAMOUH - Son PHAM DANG "
+
+paths:
+  raw_blocks: "data/blocks/blocks" 
+  
+  market_data: "data/prices/btcusd_1-min_data.csv"
+
+  output_transactions: "data/output/transactions_parquet"
+  output_market: "data/output/market_parquet"
+  output_features: "data/output/features_parquet"
+  
+  metrics_file: "project_metrics_log.csv"
+
+spark:
+  app_name: "BTC_ETL_Custom"
+  master: "local[*]"
+  log_level: "WARN"
+  driver_memory: "4g"
